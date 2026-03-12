@@ -33,7 +33,7 @@ import CRMContacts from "./pages/CRMContacts";
 import CRMActivities from "./pages/CRMActivities";
 import CRMReports from "./pages/CRMReports";
 import GlobalSettings from "./pages/GlobalSettings";
-import { usePasswordAuth } from "./hooks/usePasswordAuth";
+import { useAuth } from "./hooks/useAuth";
 import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 
@@ -105,7 +105,7 @@ function Router({ mode, onChangeMode, isAuthenticated, onLogout }: any) {
 
 function App() {
   const [mode, setMode] = useState<'online' | 'offline' | null>(null);
-  const { isAuthenticated, error, login, logout } = usePasswordAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   useEffect(() => {
     const savedMode = localStorage.getItem('appMode') as 'online' | 'offline' | null;
@@ -117,7 +117,7 @@ function App() {
   };
 
   const handleLogin = (username: string, password: string) => {
-    login(username, password);
+    // Login is handled by the Login component
   };
 
   const handleForgotPassword = () => {
@@ -134,10 +134,7 @@ function App() {
             mode={mode} 
             onChangeMode={handleChangeMode}
             isAuthenticated={isAuthenticated}
-            error={error}
-            onLogin={handleLogin}
             onLogout={logout}
-            onForgotPassword={handleForgotPassword}
           />
         </TooltipProvider>
       </ThemeProvider>
