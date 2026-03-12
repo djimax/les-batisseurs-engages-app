@@ -42,23 +42,23 @@ export default function AdminRoles() {
     });
   };
 
-  // Check if user is admin
-  if (!user || user.role !== "admin") {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle>Accès Refusé</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Vous n'avez pas les permissions pour accéder à cette page.
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  // Check if user is admin - DISABLED FOR NOW
+  // if (!user || user.role !== "admin") {
+  //   return (
+  //     <div className="flex items-center justify-center min-h-screen">
+  //       <Card className="w-full max-w-md">
+  //         <CardHeader>
+  //           <CardTitle>Accès Refusé</CardTitle>
+  //         </CardHeader>
+  //         <CardContent>
+  //           <p className="text-sm text-muted-foreground">
+  //             Vous n'avez pas les permissions pour accéder à cette page.
+  //           </p>
+  //         </CardContent>
+  //       </Card>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="space-y-6">
