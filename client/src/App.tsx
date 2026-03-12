@@ -12,30 +12,25 @@ import Members from "./pages/Members";
 import Activity from "./pages/Activity";
 import Archives from "./pages/Archives";
 import Finance from "./pages/Finance";
-import Offline from "./pages/Offline";
-import ModeSelector from "./pages/ModeSelector";
-import Settings from "./pages/Settings";
 import Campaigns from "./pages/Campaigns";
 import Adhesions from "./pages/Adhesions";
 import Events from "./pages/Events";
 import ProtectedUserManagement from "./pages/ProtectedUserManagement";
 import AdminPortal from "./pages/AdminPortal";
-import ForgotPassword from "./pages/ForgotPassword";
-import Login from "./pages/Login";
+import Announcements from "./pages/Announcements";
+import EmailComposer from "./pages/EmailComposer";
 import AuditHistory from "./pages/AuditHistory";
 import AdminRoles from "./pages/AdminRoles";
 import AdminAuditLogs from "./pages/AdminAuditLogs";
-import Announcements from "./pages/Announcements";
-import EmailComposer from "./pages/EmailComposer";
 import AdminSettings from "./pages/AdminSettings";
 import { CRMDashboard } from "./pages/CRMDashboard";
 import CRMContacts from "./pages/CRMContacts";
 import CRMActivities from "./pages/CRMActivities";
 import CRMReports from "./pages/CRMReports";
+import Settings from "./pages/Settings";
 import GlobalSettings from "./pages/GlobalSettings";
+import Login from "./pages/Login";
 import { useAuth } from "./hooks/useAuth";
-import { useState, useEffect } from "react";
-import { trpc } from "@/lib/trpc";
 
 function OnlineRouter({ isAuthenticated, onLogout }: any) {
   if (!isAuthenticated) {
@@ -76,54 +71,12 @@ function OnlineRouter({ isAuthenticated, onLogout }: any) {
   );
 }
 
-function OfflineRouter() {
-  return (
-    <Switch>
-      <Route path="*" component={() => <Offline />} />
-    </Switch>
-  );
-}
-
-function Router({ mode, onChangeMode, isAuthenticated, onLogout }: any) {
-  if (mode === null) {
-    return (
-      <ModeSelector
-        onSelectMode={(selectedMode) => {
-          localStorage.setItem('appMode', selectedMode);
-          onChangeMode(selectedMode);
-        }}
-      />
-    );
-  }
-
-  if (mode === 'offline') {
-    return <OfflineRouter />;
-  }
-
+function Router({ isAuthenticated, onLogout }: any) {
   return <OnlineRouter isAuthenticated={isAuthenticated} onLogout={onLogout} />;
 }
 
 function App() {
-  const [mode, setMode] = useState<'online' | 'offline' | null>(null);
   const { isAuthenticated, logout } = useAuth();
-
-  useEffect(() => {
-    const savedMode = localStorage.getItem('appMode') as 'online' | 'offline' | null;
-    setMode(savedMode);
-  }, []);
-
-  const handleChangeMode = (newMode: 'online' | 'offline') => {
-    setMode(newMode);
-  };
-
-  const handleLogin = (username: string, password: string) => {
-    // Login is handled by the Login component
-  };
-
-  const handleForgotPassword = () => {
-    // Naviguer vers la page de récupération de mot de passe
-    window.location.hash = '#/forgot-password';
-  };
 
   return (
     <ErrorBoundary>
@@ -131,8 +84,6 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router 
-            mode={mode} 
-            onChangeMode={handleChangeMode}
             isAuthenticated={isAuthenticated}
             onLogout={logout}
           />
