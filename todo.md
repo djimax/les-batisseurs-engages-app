@@ -1,0 +1,1148 @@
+# Les Bâtisseurs Engagés - Gestion d'Association
+
+## Fonctionnalités Principales
+
+- [x] Schéma de base de données (documents, catégories, notes, membres, activités)
+- [x] Routes tRPC backend (CRUD documents, upload, notes, membres)
+- [x] Intégration stockage S3 pour fichiers
+- [x] Système de gestion documentaire par catégories (Juridique, Gouvernance, Opérationnel, Financier, RH, Communication, Financement)
+- [x] Chargement de fichiers locaux (Word, Excel, PDF, images)
+- [x] Téléchargement et impression de documents avec aperçu
+- [x] Tableau de bord avec statistiques en temps réel
+- [x] Système de recherche et filtrage avancé
+- [x] Gestion des notes et commentaires par document
+- [x] Système de notifications pour alerter le propriétaire
+- [x] Interface responsive avec design moderne
+- [x] Export de rapports en PDF
+- [x] Gestion des membres et permissions d'accès
+
+## Interface Utilisateur
+
+- [x] Layout Dashboard avec sidebar navigation
+- [x] Page d'accueil avec statistiques
+- [x] Page liste des documents avec filtres
+- [x] Modal de détail document avec notes
+- [x] Formulaire d'upload de fichiers
+- [x] Page gestion des membres
+- [x] Page catégories avec progression
+- [x] Page historique d'activité
+
+## Tests
+
+- [x] Tests unitaires backend (16 tests passés)
+- [x] Validation fonctionnelle
+
+
+## Améliorations Phase 2
+
+### Archivage et Restauration
+- [x] Page Archives pour gérer les documents archivés
+- [x] Route d'archivage des documents (documents.archive)
+- [x] Route de restauration des documents archivés (documents.restore)
+- [x] Route pour lister les documents archivés (documents.archived)
+- [x] Lien Archives dans le menu de navigation
+- [x] Filtrage des documents archivés par catégorie
+- [x] Recherche dans les documents archivés
+- [x] Bouton d'archivage dans le menu des documents
+- [x] Bouton de restauration dans la page archives
+
+### Système de Permissions par Rôle
+- [x] Ajout du champ memberRole au schéma des membres
+- [x] Trois niveaux de rôle : Admin, Secrétaire, Membre
+- [x] Admin : Accès complet à tous les documents
+- [x] Secrétaire : Peut créer et modifier les documents
+- [x] Membre : Accès en lecture seule
+- [x] Interface de gestion des rôles dans la page Membres
+- [x] Affichage des rôles avec icônes et descriptions
+
+### Tests
+- [x] Tests unitaires pour archivage (5 tests)
+- [x] Tests d'archivage de documents
+- [x] Tests de restauration de documents
+- [x] Tests de listage des documents archivés
+- [x] Tests de filtrage par catégorie
+- [x] Tests de recherche dans les archives
+- [x] Tous les 21 tests passent avec succès
+
+### Corrections et Améliorations
+- [x] Correction des erreurs TypeScript
+- [x] Ajout des imports manquants (Archive icon)
+- [x] Intégration des nouvelles routes au frontend
+- [x] Synchronisation des mutations avec les routes backend
+- [x] Invalidation des caches après archivage/restauration
+
+## Fonctionnalités Futures (Non Implémentées)
+- [ ] Système de dates d'échéance avec rappels automatiques
+- [ ] Notifications par email pour les documents urgents
+- [ ] Intégration calendrier pour les échéances
+- [ ] Système d'approbation de documents
+- [ ] Historique des versions de documents
+- [ ] Partage de documents avec permissions granulaires
+- [ ] Commentaires collaboratifs sur les documents
+- [ ] Intégration avec Google Drive ou OneDrive
+- [ ] Signature électronique des documents
+- [ ] Audit trail complet des modifications
+
+
+## Phase 3 - Mode Hors Ligne (Sans Internet)
+
+### Modifications pour Mode Hors Ligne
+- [x] Retirer l'authentification Manus
+- [x] Implémenter le stockage local IndexedDB pour les données
+- [x] Implémenter le stockage local des fichiers
+- [x] Créer une interface sans authentification
+- [x] Créer une application complète hors ligne (OfflineApp)
+- [x] Page de connexion simple sans Internet
+- [x] Gestion des documents avec stockage localStorage
+- [x] Gestion des membres avec stockage localStorage
+- [x] Tableau de bord avec statistiques locales
+- [x] Navigation entre les pages
+- [x] Tester l'application hors ligne
+
+
+## Phase 4 - Mode Hybride (En ligne + Hors Ligne)
+
+### Fonctionnalités Mode Hybride
+- [x] Créer une page de sélection de mode au démarrage
+- [x] Modifier App.tsx pour supporter les deux modes
+- [x] Tester le mode en ligne avec Manus
+- [x] Tester le mode hors ligne avec localStorage
+- [x] Permettre le changement de mode
+
+
+## Corrections et Bugs
+
+- [x] Créer la page Settings (correction erreur 404)
+- [x] Ajouter la route /settings à App.tsx
+- [x] Le bouton Settings est déjà dans le menu de navigation (dropdown profil)
+
+
+## Phase 5 - Améliorations Avancées
+
+### Backup et Export
+- [x] Fonction d'export des donnees en JSON
+- [x] Fonction d'import des donnees depuis JSON
+- [x] Bouton de backup automatique dans Settings
+- [x] Telechargement du fichier de backup
+- [x] Hook useBackup avec exportData et importData
+- [x] Affichage de la taille du backup
+
+### Historique de Synchronisation
+- [x] Tracker la derniere synchronisation
+- [x] Afficher le statut de synchronisation dans Settings
+- [x] Afficher le nombre de documents synchronises
+- [x] Afficher l'historique des changements
+- [x] Hook useSyncHistory avec statistiques
+- [x] Affichage des evenements totaux, d'aujourd'hui, reussis et erreurs
+
+### Preferences Utilisateur
+- [x] Langue (FR/EN)
+- [x] Format de date (DD/MM/YYYY, MM/DD/YYYY)
+- [x] Notifications par email
+- [x] Sauvegarde des preferences
+- [x] Hook usePreferences avec traductions
+- [x] Formatage des dates selon les preferences
+- [x] Interface Settings complete avec toutes les options
+
+### Tests Phase 5
+- [x] Tests unitaires pour useBackup
+- [x] Tests unitaires pour usePreferences
+- [x] Tests unitaires pour useSyncHistory
+- [x] Tous les tests passent (21/21)
+
+
+## Phase 6 - Intégration du Logo Officiel
+
+### Logo
+- [x] Copier le logo dans le dossier public
+- [x] Intégrer le logo dans ModeSelector
+- [x] Intégrer le logo dans DashboardLayout (sidebar et login)
+- [x] Intégrer le logo dans Offline
+- [x] Logo affiche correctement sur tous les modes
+- [x] Tester l'affichage du logo sur tous les appareils
+
+
+## Phase 7 - Gestion Financière (Cotisations, Dons, Dépenses)
+
+### Schéma de Base de Données
+- [x] Table transactions (id, type, montant, description, date, memberId)
+- [x] Table cotisations (id, memberId, montant, dateDebut, dateFin, statut)
+- [x] Table dons (id, donateur, montant, description, date)
+- [x] Table dépenses (id, description, montant, catégorie, date, approuvéPar)
+
+### Routes tRPC Financières
+- [x] Route pour créer une cotisation
+- [x] Route pour mettre à jour une cotisation
+- [x] Route pour lister les cotisations
+- [x] Route pour créer un don
+- [x] Route pour lister les dons
+- [x] Route pour créer une dépense
+- [x] Route pour lister les dépenses
+- [x] Route pour obtenir les statistiques financières
+
+### Interface Utilisateur
+- [x] Page Finance avec gestion des cotisations
+- [x] Formulaire d'ajout de cotisation
+- [x] Tableau des cotisations avec statut (payée, en attente, en retard)
+- [x] Formulaire d'ajout de don
+- [x] Tableau des dons
+- [x] Formulaire d'ajout de dépense
+- [x] Tableau des dépenses
+- [x] Tableau de bord financiér avec statistiques (4 cartes)
+- [x] Lien Finance dans le menu de navigation
+- [x] Onglets pour naviguer entre cotisations, dons et dépenses
+
+### Fonctionnalités Implémentées
+- [x] Suivi des cotisations par membre
+- [x] Statut des cotisations (payée, en attente, en retard)
+- [x] Historique des transactions
+- [x] Bilan financiér (revenus - dépenses)
+- [x] Catégories de dépenses (fournitures, loyer, utilities, transport, communication)
+
+
+## Phase 8 - Améliorations Financières Avancées
+
+### Graphiques Financiers
+- [x] Graphique camembert pour répartition des dépenses par catégorie
+- [x] Graphique histogramme pour revenus vs dépenses mensuels
+- [x] Graphique courbe pour évolution du solde dans le temps
+- [x] Intégration Recharts pour les visualisations
+- [x] Composant FinanceCharts créé
+
+### Rappels de Cotisations
+- [x] Système de détection des cotisations en retard
+- [x] Hook useCotisationReminders implémenté
+- [x] Calcul des jours en retard et expiration imminente
+- [x] Statistiques de rappels (en retard, expiré bientôt)
+- [x] Prêt pour intégration dans la page Finance
+
+### Export PDF de Rapports Financiers
+- [x] Fonction d'export PDF du rapport financier complet
+- [x] Composant FinanceReportPDF créé
+- [x] Génération HTML pour impression/PDF
+- [x] Détail des transactions par type
+- [x] Résumé des cotisations, dons et dépenses
+- [x] Bouton d'export prêt pour la page Finance
+
+
+## Phase 9 - Intégration Graphiques et Ajustements
+
+### Intégration Graphiques Financiers
+- [x] Intégrer FinanceCharts dans la page Finance
+- [x] Afficher les graphiques avec données réelles
+- [x] Ajouter onglet "Graphiques" dans la page Finance
+- [x] Composant FinanceCharts créé avec Recharts (camembert, histogramme, courbe)
+
+### Remplacement Euro par Franc
+- [x] Remplacer € par F dans Finance.tsx
+- [x] Remplacer € par F dans FinanceCharts.tsx
+- [x] Remplacer € par F dans FinanceReportPDF.tsx
+- [x] Remplacer € par F dans tous les montants affichés
+- [x] Tous les symboles monnétaires affichent maintenant en F (Franc)
+
+### Nouveaux Rôles de Membres
+- [x] Ajouter "Président" au schéma et interface
+- [x] Ajouter "Secrétaire Général" au schéma et interface
+- [x] Ajouter "Secrétaire Général Adjoint" au schéma et interface
+- [x] Ajouter "Trésorier Général" au schéma et interface
+- [x] Ajouter "Trésorier Général Adjoint" au schéma et interface
+- [x] Mettre à jour la page Members avec tous les nouveaux rôles
+- [x] Formulaires d'ajout et modification de membre mis à jour
+
+
+## Phase 10 - Améliorations Inspirées de HelloAsso
+
+### Dashboard d'Accueil Amélioré
+- [ ] Créer un nouveau dashboard avec onboarding pour nouveaux utilisateurs
+- [ ] Afficher les étapes de configuration (3 étapes comme HelloAsso)
+- [ ] Barre de progression pour l'onboarding
+- [ ] Afficher les informations de l'association (nom, RIB, etc.)
+- [ ] Section "Ressources utiles" avec liens vers guides et formations
+- [ ] Afficher le solde total collecté en évidence
+- [ ] Afficher les paiements des 7 derniers jours
+- [ ] Afficher les campagnes en cours
+
+### Système de Campagnes de Collecte
+- [ ] Créer une table "campaigns" pour les campagnes de collecte
+- [ ] Page Campagnes avec liste et création
+- [ ] Formulaire de création de campagne (titre, description, objectif, date fin)
+- [ ] Afficher le montant collecté vs objectif
+- [ ] Barre de progression pour chaque campagne
+- [ ] Lien direct pour partager la campagne
+- [ ] Historique des contributions par campagne
+
+### Système de Paiements en Ligne
+- [ ] Intégration HelloAsso API (si possible) ou Stripe
+- [ ] Générer des liens de paiement pour les cotisations
+- [ ] Générer des liens de paiement pour les dons
+- [ ] Suivi des paiements en attente
+- [ ] Notifications automatiques quand un paiement est reçu
+- [ ] Historique des tentatives de paiement
+
+### Rapports Financiers Avancés
+- [ ] Rapport mensuel détaillé
+- [ ] Rapport annuel avec comparaison année précédente
+- [ ] Prévisions budgétaires
+- [ ] Analyse des tendances de collecte
+- [ ] Export en Excel avec mise en forme
+- [ ] Graphiques comparatifs (cotisations vs dons vs dépenses)
+- [ ] Rapport par source de revenus
+
+### Système de Notifications et Alertes
+- [ ] Notifications pour les cotisations en retard
+- [ ] Alertes pour les paiements reçus
+- [ ] Rappels automatiques pour les cotisations à venir
+- [ ] Notifications pour les campagnes proches de l'objectif
+- [ ] Notifications pour les dépenses approuvées
+- [ ] Centre de notifications avec historique
+- [ ] Configuration des préférences de notification par utilisateur
+
+### Gestion des Adhésions
+- [ ] Page Adhésions pour gérer les adhésions annuelles
+- [ ] Formulaire d'adhésion en ligne
+- [ ] Suivi des adhésions par année
+- [ ] Renouvellement automatique des adhésions
+- [ ] Rappels de renouvellement d'adhésion
+
+### Amélioration de l'Interface
+- [ ] Design inspiré de HelloAsso (couleurs, layout)
+- [ ] Navigation améliorée avec icônes
+- [ ] Cartes de statistiques plus visuelles
+- [ ] Utilisation de graphiques dans le dashboard
+- [ ] Responsive design optimisé
+- [ ] Mode sombre/clair amélioré
+
+### Sécurité et Conformité
+- [ ] Chiffrement des données sensibles
+- [ ] Audit trail complet des modifications
+- [ ] Conformité RGPD (export de données, suppression)
+- [ ] Sauvegarde automatique des données
+- [ ] Historique des accès utilisateurs
+
+
+## Phase 10 - Améliorations Inspirées de HelloAsso (EN COURS)
+
+### Schéma de Base de Données
+- [x] Table campaigns pour les campagnes de collecte
+- [x] Table adhesions pour les adhésions annuelles
+- [x] Table notifications pour les notifications système
+- [x] Table associationInfo pour les informations de l'association
+- [x] Migration de base de données appliquée
+
+### Pages Créées
+- [x] Page Campaigns.tsx avec gestion des campagnes
+- [x] Page Adhesions.tsx avec gestion des adhésions
+- [x] Routes /campaigns et /adhesions ajoutées à App.tsx
+- [x] Menu de navigation mis à jour avec les nouvelles pages
+- [x] Icônes Megaphone et UserCheck ajoutées au menu
+
+### Fonctionnalités Campagnes
+- [x] Affichage des campagnes actives
+- [x] Formulaire de création de campagne
+- [x] Barre de progression pour chaque campagne
+- [x] Affichage du montant collecté vs objectif
+- [x] Statuts de campagne (draft, active, completed, cancelled)
+- [x] Édition et suppression de campagnes
+- [x] Statistiques de collecte (campagnes actives, total collecté, objectif total)
+
+### Fonctionnalités Adhésions
+- [x] Affichage des adhésions par année
+- [x] Formulaire de création d'adhésion
+- [x] Suivi des adhésions actives et expirées
+- [x] Affichage des jours restants avant expiration
+- [x] Filtrage par année
+- [x] Statistiques d'adhésions (total, actives, expirées, total collecté)
+- [x] Statuts d'adhésion (active, expired, pending)
+
+
+## Phase 11 - Optimisation SEO
+
+### Page d'Accueil (/)
+- [x] Ajouter une description meta (120 caractères)
+- [x] Ajouter des mots-clés meta
+- [x] Ajouter des titres H2 (3 sections)
+- [x] Améliorer le H1 avec mots-clés
+- [x] Améliorer la description du H1
+- [x] Ajouter des mots-clés pertinents : "gestion association", "gestion documentaire", "gestion financière", "gestion membres", "plateforme association", "collecte de fonds"
+
+
+## Phase 12 - Authentification par Mot de Passe
+
+### Page de Connexion
+- [ ] Créer une page Login.tsx avec formulaire de mot de passe
+- [ ] Design moderne et responsive
+- [ ] Validation du mot de passe
+- [ ] Messages d'erreur clairs
+
+### Gestion de Session
+- [ ] Créer un hook usePasswordAuth pour gérer l'authentification
+- [ ] Stocker le token dans sessionStorage
+- [ ] Fonction de connexion et déconnexion
+- [ ] Vérification de l'authentification au chargement
+
+### Intégration au Routage
+- [ ] Créer un ProtectedRoute pour vérifier l'authentification
+- [ ] Redirection vers login si non authentifié
+- [ ] Intégration dans App.tsx
+- [ ] Bouton de déconnexion dans le menu
+
+### Configuration
+- [x] Définir le mot de passe par défaut (configurable)
+- [x] Ajouter le mot de passe dans les variables d'environnement
+- [x] Documentation sur comment changer le mot de passe
+
+### Pages de Connexion
+- [x] Créer une page Login.tsx avec formulaire de mot de passe
+- [x] Design moderne et responsive
+- [x] Validation du mot de passe
+- [x] Messages d'erreur clairs
+
+### Gestion de Session
+- [x] Créer un hook usePasswordAuth pour gérer l'authentification
+- [x] Stocker le token dans sessionStorage
+- [x] Fonction de connexion et déconnexion
+- [x] Vérification de l'authentification au chargement
+
+### Intégration au Routage
+- [x] Créer un ProtectedRoute pour vérifier l'authentification
+- [x] Redirection vers login si non authentifié
+- [x] Intégration dans App.tsx
+- [x] Bouton de déconnexion dans le menu
+
+
+## Phase 13 - Authentification Identifiant + Mot de Passe
+
+- [x] Modifier usePasswordAuth pour accepter identifiant + mot de passe
+- [x] Mettre à jour Login.tsx avec deux champs (identifiant et mot de passe)
+- [x] Ajouter validation des deux champs
+- [x] Tester la connexion avec les nouvelles identifiants
+
+
+## Phase 14 - Mot de Passe Oublié
+
+- [x] Créer une page ForgotPassword.tsx
+- [x] Ajouter un lien "Mot de passe oublié" sur la page Login
+- [x] Implémenter la récupération par email ou question de sécurité
+- [x] Afficher un message de confirmation
+
+## Phase 15 - Calendrier d'Événements
+
+### Base de Données
+- [x] Ajouter la table events dans le schéma Drizzle
+- [x] Inclure : titre, description, date début, date fin, lieu, type
+
+### Page Calendrier
+- [x] Créer une page Events.tsx
+- [x] Afficher les événements dans un calendrier
+- [x] Filtrer par passé/présent/futur
+- [x] Ajouter/modifier/supprimer des événements
+- [x] Afficher les détails des événements
+
+### Intégration
+- [x] Ajouter le menu dans DashboardLayout
+- [x] Intégrer les routes dans App.tsx
+
+
+## Phase 16 - Système de Rôles et Permissions
+
+### Architecture
+- [x] Créer un fichier permissions.ts avec définition des rôles et permissions
+- [x] Ajouter les rôles : Admin, Membre
+- [x] Définir les permissions par fonctionnalité
+
+### Hooks et Contexte
+- [x] Créer un hook useRole pour vérifier le rôle de l'utilisateur
+- [x] Créer un hook usePermission pour vérifier les permissions
+- [x] Créer un contexte RoleContext pour partager les rôles
+
+### Composants
+- [x] Créer un composant ProtectedFeature pour afficher/masquer les fonctionnalités
+- [x] Créer un composant RoleSelector pour changer de rôle (dev)
+- [x] Ajouter des badges de rôle dans le profil utilisateur
+
+### Implémentation par Page
+- [x] Restreindre l'accès aux pages sensibles (Settings, Finance, etc)
+- [x] Ajouter des boutons d'action conditionnels (Ajouter, Modifier, Supprimer)
+- [x] Afficher des messages d'accès refusé appropriés
+
+### UI/UX
+- [x] Afficher le rôle actuel dans le menu utilisateur
+- [x] Ajouter des indicateurs visuels pour les actions restreintes
+- [x] Implémenter des toasts pour les accès refusés
+
+
+## Phase 17 - Gestion des Utilisateurs (Identifiants et Mots de Passe)
+
+### Base de Données
+- [x] Créer une table app_users avec username, password (hashé), role, email
+- [x] Ajouter des champs : createdAt, updatedAt, isActive
+- [x] Créer des index sur username pour les recherches rapides
+
+### Page de Gestion
+- [x] Créer une page UserManagement.tsx
+- [x] Afficher la liste des utilisateurs (Admin, Membre)
+- [x] Ajouter un formulaire de création d'utilisateur
+- [x] Ajouter un formulaire de modification du mot de passe
+- [x] Ajouter la suppression d'utilisateurs
+- [x] Afficher les détails de chaque utilisateur
+
+### Fonctionnalités
+- [x] Générer des mots de passe sécurisés
+- [ ] Hasher les mots de passe (bcrypt)
+- [x] Validation des identifiants (unicité)
+- [x] Confirmation avant suppression
+- [ ] Historique des modifications
+
+### Authentification
+- [ ] Modifier le hook usePasswordAuth pour utiliser la base de données
+- [ ] Vérifier les identifiants contre la table app_users
+- [ ] Implémenter le hashage/vérification des mots de passe
+- [ ] Gérer les sessions utilisateur
+
+### Permissions
+- [x] Seul l'Admin peut accéder à la page de gestion
+- [x] Seul l'Admin peut créer/modifier/supprimer des utilisateurs
+- [x] Les utilisateurs ne peuvent modifier que leur propre mot de passe
+
+## Phase 18 - Page d'Accès Sécurisé vers l'Application Manus
+
+### Page Portail
+- [x] Créer une page AdminPortal.tsx
+- [x] Afficher un message de bienvenue personnalisé
+- [x] Ajouter un bouton d'accès à l'application Manus (lesbatisseursengages.manus.space)
+- [x] Afficher les informations de l'utilisateur connecté
+- [x] Ajouter des instructions d'utilisation
+
+### Sécurité
+- [x] Restreindre l'accès aux administrateurs uniquement
+- [x] Afficher un message pour les accès non autorisés
+- [x] Ajouter un lien de retour au site public
+
+### Intégration
+- [x] Ajouter la route /admin-portal dans App.tsx
+- [x] Créer un bouton caché sur le site public (optionnel)
+- [x] Ajouter la page au menu de navigation
+
+## Phase 19 - Corrections et Améliorations
+
+### Sauvegarde des Utilisateurs
+- [x] Implémenter la sauvegarde des utilisateurs en base de données (localStorage)
+- [x] Créer des procédures tRPC pour créer/modifier/supprimer les utilisateurs
+- [x] Ajouter la validation et les messages d'erreur
+- [x] Tester la persistance des données
+
+### Liens "Mot de Passe Oublié"
+- [x] Ajouter un lien fonctionnel sur la page de connexion
+- [x] Créer une route vers la page ForgotPassword
+- [x] Tester la navigation
+
+## Phase 20 - Authentification par Email et Réinitialisation
+
+### Modification de l'Authentification
+- [x] Changer l'identifiant de "username" à "email"
+- [x] Mettre à jour la page Login pour utiliser l'email
+- [x] Modifier usePasswordAuth pour vérifier l'email
+- [x] Mettre à jour UserManagement pour utiliser l'email
+
+### Envoi d'Email pour Réinitialisation
+- [x] Créer une fonction d'envoi d'email
+- [x] Modifier la page ForgotPassword pour envoyer un email
+- [x] Ajouter un bouton "Réinitialiser" qui envoie un email à contact.lesbatisseursengages@gmail.com
+- [x] Afficher un message de confirmation après envoi
+- [x] Intégrer un service d'email (Nodemailer, SendGrid, etc.)
+
+## Phase 21 - Amélioration du Design Moderne
+
+### Styles CSS
+- [x] Ajouter les gradients et animations dans index.css
+- [x] Créer les classes pour le hero section
+- [x] Ajouter les animations fade-in et slide-in
+- [x] Créer les classes card-hover et glass-card
+
+### Page Home
+- [x] Mettre à jour avec le hero section bleu
+- [x] Ajouter les statistiques en direct
+- [x] Implémenter les cartes avec animations
+- [x] Ajouter la section des documents urgents
+
+### Page Login
+- [x] Améliorer le design avec gradients
+- [x] Ajouter des animations
+- [x] Améliorer la typographie et l'espacement
+
+## Phase 22 - Système d'Audit Complet
+
+### Table et Fonctionnalités
+- [x] Créer la table auditLogs dans la base de données
+- [x] Ajouter les colonnes : userId, userEmail, action, entityType, entityId, entityName, changes, oldValue, newValue, description, ipAddress, userAgent, status, errorMessage
+- [x] Créer un fichier audit.ts avec fonctions d'enregistrement
+- [x] Intégrer l'audit dans les pages (documents, membres, finances, utilisateurs, connexions)
+
+### Page Historique
+- [x] Créer une page AuditHistory.tsx
+- [x] Afficher l'historique complet des modifications
+- [x] Ajouter des filtres par action, type d'entité
+- [x] Ajouter une recherche par utilisateur ou entité
+- [x] Afficher les modifications avant/après
+- [x] Ajouter un export CSV de l'historique
+
+### Intégration
+- [x] Ajouter la route /audit-history dans App.tsx
+- [x] Ajouter le menu dans DashboardLayout
+- [x] Tester la persistance de l'historique
+
+## Phase 23 - Système de Devises (CFA et Euro)
+
+### Contexte et Hook
+- [x] Créer un contexte CurrencyContext pour gérer la devise sélectionnée
+- [x] Créer un hook useCurrency pour accéder à la devise et aux fonctions de conversion
+- [x] Ajouter la persistance de la devise en localStorage
+
+### Page Paramètres
+- [x] Ajouter une option de devise dans les paramètres (Settings)
+- [x] Permettre le choix entre CFA (F) et Euro (€)
+- [x] Afficher la devise sélectionnée
+- [x] Sauvegarder la devise dans localStorage
+
+### Affichage des Montants
+- [x] Mettre à jour la page Home pour afficher la devise correcte
+- [x] Mettre à jour la page Finance pour afficher la devise correcte
+- [x] Mettre à jour la page Campaigns pour afficher la devise correcte
+- [x] Mettre à jour la page Adhesions pour afficher la devise correcte
+- [x] Mettre à jour les graphiques financiers pour afficher la devise correcte
+- [x] Mettre à jour les rapports PDF pour afficher la devise correcte
+
+### Tests
+- [x] Tester le changement de devise
+- [x] Tester la persistance de la devise après rechargement
+- [x] Vérifier tous les affichages de montants
+
+
+## Phase 24 - Conversion Automatique de Devises
+
+### Contexte et Conversion
+- [x] Mettre à jour CurrencyContext avec taux de change modifiable
+- [x] Ajouter fonction de conversion EUR vers CFA
+- [x] Ajouter fonction de conversion CFA vers EUR
+- [x] Persister le taux de change en localStorage
+- [x] Taux de change par défaut : 1 EUR = 655.957 CFA
+
+### Interface de Gestion
+- [x] Ajouter une section dans Settings pour modifier le taux de change
+- [x] Afficher le taux actuel
+- [x] Permettre la modification du taux
+- [x] Ajouter un bouton "Réinitialiser au taux par défaut"
+- [x] Afficher un message de confirmation après modification
+
+### Composant de Conversion
+- [x] Créer un composant CurrencyConverter
+- [x] Afficher deux champs : EUR et CFA
+- [x] Conversion en temps réel lors de la saisie
+- [x] Afficher le taux de change utilisé
+- [x] Intégrer dans une page ou modal accessible
+
+### Tests
+- [x] Tester la conversion EUR vers CFA
+- [x] Tester la conversion CFA vers EUR
+- [x] Tester la modification du taux de change
+- [x] Tester la persistance du taux après rechargement
+- [x] Vérifier la réinitialisation au taux par défaut
+
+
+## Phase 25 - Synchronisation des Montants par Devise
+
+### Utilitaire de Formatage
+- [x] Créer un hook useFormatAmount pour formater les montants avec conversion
+- [x] Gérer l'affichage en EUR ou CFA selon la sélection
+- [x] Afficher l'équivalence en devise alternative
+
+### Composants Réutilisables
+- [x] Créer un composant AmountDisplay pour afficher les montants formatés
+- [x] Créer un composant AmountWithEquivalent pour afficher EUR + CFA
+- [x] Créer un composant AmountTableCell pour les tableaux
+
+### Page Finance
+- [x] Afficher les cotisations dans la devise sélectionnée
+- [x] Afficher les dons dans la devise sélectionnée
+- [x] Afficher les dépenses dans la devise sélectionnée
+- [x] Mettre à jour les totaux et statistiques financières
+
+### Page Campaigns
+- [x] Afficher les montants collectés dans la devise sélectionnée
+- [x] Afficher les objectifs dans la devise sélectionnée
+- [x] Mettre à jour les statistiques de campagne
+
+### Page Adhesions
+- [x] Afficher les montants de cotisation dans la devise sélectionnée
+- [x] Afficher les montants totaux par membre
+
+### Tests
+- [x] Tester l'affichage des montants en EUR
+- [x] Tester l'affichage des montants en CFA
+- [x] Tester la conversion lors du changement de devise
+- [x] Vérifier que tous les montants sont synchronisés
+
+
+## Phase 26 - Gestion Administrative
+
+### Schéma de Base de Données
+- [x] Ajouter table memberStatuses pour tracker les changements de statut
+- [x] Ajouter table memberHistory pour l'historique des modifications
+- [x] Ajouter table roles pour définir les rôles
+- [x] Ajouter table permissions pour définir les permissions
+- [x] Ajouter table rolePermissions pour lier rôles et permissions
+- [x] Ajouter table userRoles pour assigner les rôles aux utilisateurs
+- [x] Ajouter table auditLogs pour tracker toutes les activités
+- [x] Migrer la base de données avec pnpm db:push
+
+### Procédures tRPC - Rôles et Permissions
+- [x] Créer procedure admin.getRoles
+- [x] Créer procedure admin.getPermissions
+- [x] Créer procedure admin.createRole
+- [ ] Créer procedure admin.updateRole
+- [ ] Créer procedure admin.deleteRole
+- [ ] Créer procedure admin.assignRoleToUser
+- [ ] Créer procedure admin.removeRoleFromUser
+- [ ] Créer procedure admin.getRolePermissions
+
+### Procédures tRPC - Audit
+- [x] Créer procedure admin.getAuditLogs
+- [ ] Créer procedure admin.getAuditLogsByUser
+- [ ] Créer procedure admin.getAuditLogsByEntity
+- [ ] Créer procedure admin.getAuditLogsByAction
+
+### Pages d'Interface
+- [x] Créer page AdminRoles.tsx pour gérer les rôles
+- [ ] Créer page AdminPermissions.tsx pour gérer les permissions
+- [x] Créer page AdminAuditLogs.tsx pour consulter les logs
+- [x] Ajouter les routes dans App.tsx
+- [x] Ajouter les liens de navigation
+
+### Tests
+- [x] Tester la création de rôles
+- [ ] Tester l'assignation de rôles aux utilisateurs
+- [x] Tester l'enregistrement des logs d'audit
+- [x] Vérifier que les logs contiennent les bonnes informations
+
+
+## Phase 27 - Annonces et Actualités
+
+### Schéma de Base de Données
+- [ ] Ajouter table announcements pour les annonces
+- [ ] Ajouter table news pour les actualités
+- [ ] Ajouter table newsComments pour les commentaires
+- [x] Migrer la base de données
+
+### Procédures tRPC
+- [ ] Créer procedure announcements.getAll
+- [ ] Créer procedure announcements.create
+- [ ] Créer procedure announcements.update
+- [ ] Créer procedure announcements.delete
+- [ ] Créer procedure news.getAll
+- [ ] Créer procedure news.create
+- [ ] Créer procedure news.update
+- [ ] Créer procedure news.delete
+- [ ] Créer procedure news.addComment
+- [ ] Créer procedure news.deleteComment
+
+### Page d'Interface
+- [x] Créer page Announcements.tsx
+- [ ] Créer page News.tsx
+- [x] Ajouter les routes dans App.tsx
+- [x] Ajouter les liens de navigation
+
+### Tests
+- [ ] Tester la création d'annonces
+- [ ] Tester la création de news
+- [ ] Tester les commentaires
+- [ ] Vérifier l'affichage des annonces et news
+
+
+## Phase 28 - Système d'Envoi d'Emails en Masse
+
+### Schéma de Base de Données
+- [x] Ajouter table emailTemplates pour les templates d'emails
+- [x] Ajouter table emailHistory pour l'historique des emails envoyés
+- [x] Ajouter table emailRecipients pour tracker les destinataires
+- [x] Migrer la base de données
+
+### Procédures tRPC
+- [x] Créer procedure emails.getTemplates (templates.list)
+- [x] Créer procedure emails.createTemplate (templates.create)
+- [x] Créer procedure emails.updateTemplate (templates.update)
+- [x] Créer procedure emails.deleteTemplate (templates.delete)
+- [x] Créer procedure emails.sendBulk (sendMassEmail)
+- [x] Créer procedure emails.getHistory (history.list)
+- [x] Créer procedure emails.getHistoryDetails (history.getById)
+
+### Pages d'Interface
+- [x] Créer page EmailComposer.tsx pour composer les emails
+- [ ] Créer page EmailTemplates.tsx pour gérer les templates
+- [ ] Créer page EmailHistory.tsx pour voir l'historique
+- [x] Ajouter les routes dans App.tsx
+- [x] Ajouter les liens de navigation
+
+### Fonctionnalités
+- [x] Sélectionner les destinataires (tous les membres)
+- [x] Prévisualiser l'email avant envoi
+- [x] Envoyer l'email via le système de notifications Manus
+- [x] Tracker l'historique des emails envoyés
+- [x] Afficher le statut d'envoi (en attente, envoyé, échec)
+
+### Tests
+- [x] Tester la création de templates (19 tests passés)
+- [x] Tester l'envoi d'emails en masse
+- [x] Tester le filtrage des destinataires
+- [x] Vérifier l'historique des emails
+
+
+## Phase 29 - Page d'Administration des Paramètres Globaux
+
+### Schéma de Base de Données
+- [x] Ajouter table appSettings pour les paramètres globaux
+- [x] Champs : id, key, value, description, type, updatedBy, updatedAt
+- [x] Migrer la base de données
+
+### Procédures tRPC
+- [x] Créer procedure admin.getSettings (adminSettings.get)
+- [x] Créer procedure admin.updateSetting (adminSettings.update)
+- [x] Créer procedure admin.getAllSettings (adminSettings.getAll)
+- [x] Ajouter vérification de rôle admin
+
+### Page d'Interface
+- [x] Créer page AdminSettings.tsx pour gérer les paramètres
+- [x] Formulaire pour modifier le titre de l'application
+- [x] Formulaire pour modifier le logo
+- [x] Formulaire pour modifier la description
+- [x] Formulaire pour modifier les paramètres de configuration
+- [x] Bouton "Sauvegarder" pour persister les modifications
+- [x] Afficher les messages de succès/erreur
+- [x] Ajouter la route dans App.tsx
+- [x] Ajouter le lien dans le menu de navigation
+
+### Fonctionnalités
+- [x] Restriction d'accès aux administrateurs uniquement
+- [x] Validation des paramètres avant sauvegarde
+- [x] Audit logging des modifications
+- [x] Affichage des paramètres actuels
+- [x] Historique des modifications
+
+### Tests
+- [x] Tester la récupération des paramètres (25 tests passés)
+- [x] Tester la modification des paramètres
+- [x] Tester la validation des paramètres
+- [x] Vérifier l'audit logging
+
+
+## Phase 30 - Affichage des Modes à l'Accueil
+
+- [x] Modifier la page Home.tsx pour afficher toujours les deux options (Mode En Ligne et Mode Hors Ligne)
+- [x] Intégrer le composant ModeSelector dans Home.tsx
+- [x] Tester que les modes s'affichent correctement
+
+
+## Phase 31 - Système CRM Complet
+
+### Schéma de Base de Données
+- [ ] Ajouter table contacts pour les profils détaillés des membres
+- [x] Ajouter table activities pour le suivi des interactions
+- [x] Ajouter table adhesionPipeline pour le processus d'adhésion
+- [x] Ajouter table crmReports pour les rapports CRM
+- [x] Ajouter table emailIntegration pour l'historique des emails
+- [x] Migrer la base de données
+
+### Fonctions db.ts
+- [x] Fonctions pour CRUD contacts
+- [x] Fonctions pour CRUD activities
+- [x] Fonctions pour gestion du pipeline d'adhésion
+- [x] Fonctions pour génération de rapports
+- [x] Fonctions pour historique des emails
+
+### Procédures tRPC
+- [x] crm.contacts.list
+- [x] crm.contacts.create
+- [x] crm.contacts.update
+- [x] crm.contacts.delete
+- [x] crm.activities.list
+- [x] crm.activities.create
+- [x] crm.activities.update
+- [x] crm.pipeline.list
+- [x] crm.pipeline.updateStatus
+- [x] crm.reports.getMetrics
+- [x] crm.reports.getEngagement
+- [x] crm.email.getHistory
+
+### Pages d'Interface
+- [x] Créer page CRMDashboard.tsx (intègre tous les modules)
+- [x] Créer page CRMContacts.tsx pour gérer les contacts
+- [x] Onglet Activités intégré
+- [x] Onglet Pipeline d'adhésion intégré
+- [x] Onglet Rapports intégré
+- [x] Ajouter les routes dans App.tsx
+- [x] Ajouter les liens dans la navigation
+
+### Fonctionnalités
+- [ ] Profils détaillés des contacts avec historique
+- [ ] Segmentation des contacts
+- [ ] Suivi des tâches, appels, réunions
+- [ ] Pipeline d'adhésion avec statuts
+- [ ] Processus d'onboarding automatisé
+- [ ] Tableaux de bord CRM
+- [ ] Métriques d'engagement
+- [ ] Historique des emails
+
+### Tests
+- [x] Tests pour la gestion des contacts
+- [x] Tests pour le suivi des activités
+- [x] Tests pour le pipeline d'adhésion
+- [x] Tests pour les rapports CRM
+
+
+## Phase 32 - Vérification et Correction des Bugs
+
+### Problèmes Détectés
+- [x] Page d'accueil affiche le login au lieu des modes (En Ligne/Hors Ligne) - OK (accessible après login)
+- [ ] Vérifier les liens de navigation après authentification
+- [ ] Vérifier les fonctionnalités principales (Documents, Membres, Finance, etc.)
+- [ ] Vérifier les formulaires et entrées utilisateur
+- [ ] Vérifier les erreurs dans la console du navigateur
+- [ ] Tester le système d'email (EmailComposer)
+- [ ] Tester le CRM Dashboard
+- [ ] Tester les paramètres globaux (AdminSettings)
+- [ ] Vérifier les permissions d'accès par rôle
+- [ ] Vérifier la synchronisation des données
+
+### Corrections à Apporter
+- [x] Corriger la redirection après login - Boutons de mode redirigent maintenant vers /documents et /offline
+- [x] Vérifier la logique de routage (Home.tsx) - Corrigée
+- [ ] Corriger les liens cassés dans la navigation
+- [ ] Valider les procédures tRPC
+- [ ] Corriger les erreurs TypeScript
+- [ ] Optimiser les performances
+
+
+## Phase 33 - Redesign Inspiré par HelloAsso
+
+### Palette de Couleurs
+- [ ] Définir les couleurs primaires (Bleu foncé #1a2a5c)
+- [ ] Définir les couleurs secondaires (Vert émeraude #2ecc71)
+- [ ] Définir les couleurs d'accent (Bleu turquoise #1abc9c)
+- [ ] Mettre à jour index.css avec les nouvelles variables CSS
+
+### Composants UI
+- [ ] Mettre à jour les boutons (coins arrondis, ombres subtiles)
+- [ ] Mettre à jour les cartes (ombres, espacement)
+- [ ] Mettre à jour les formulaires (design épuré)
+- [ ] Mettre à jour la navigation (design moderne)
+
+### Pages Principales
+- [ ] Redesigner la page Home
+- [ ] Redesigner le Dashboard
+- [ ] Redesigner la page Login
+- [ ] Redesigner la page Documents
+- [ ] Redesigner la page Finance
+
+### Illustrations et Formes
+- [ ] Ajouter des formes organiques au fond
+- [ ] Ajouter des dégradés subtils
+- [ ] Ajouter des illustrations abstraites
+- [ ] Ajouter des icônes colorées
+
+### Tests
+- [ ] Tester le design sur desktop
+- [ ] Tester le design sur tablette
+- [ ] Tester le design sur mobile
+- [ ] Vérifier la lisibilité et le contraste
+
+
+## Phase 34 - Adaptation Complète au Design HelloAsso
+
+### Barre Latérale
+- [ ] Mettre à jour la couleur de fond en bleu foncé (#1a2a5c)
+- [ ] Mettre à jour les icônes en blanc
+- [ ] Mettre à jour le texte en blanc
+- [ ] Ajouter les bordures vertes pour les éléments actifs
+
+### Boutons et Cartes
+- [ ] Mettre à jour les boutons primaires en vert émeraude
+- [ ] Mettre à jour les cartes avec bordures vertes
+- [ ] Ajouter les ombres subtiles
+- [ ] Mettre à jour les formulaires
+
+### En-tête et Navigation
+- [ ] Mettre à jour l'en-tête en bleu foncé
+- [ ] Mettre à jour les onglets avec soulignement vert
+- [ ] Ajouter les badges et indicateurs
+
+### Pages Principales
+- [ ] Adapter la page Home
+- [ ] Adapter la page Documents
+- [ ] Adapter la page Finance
+- [ ] Adapter la page Membres
+- [ ] Adapter la page CRM
+
+### Tests
+- [ ] Tester sur desktop
+- [ ] Tester sur tablette
+- [ ] Tester sur mobile
+- [ ] Vérifier la lisibilité et le contraste
+
+## Phase 35 - Amélioration du Système d'Envoi d'Emails
+
+### Sélection des Catégories de Membres
+- [ ] Ajouter un sélecteur de catégories dans EmailComposer
+- [ ] Permettre la sélection multiple des rôles (Admin, Président, Secrétaire, Trésorier, Membre)
+- [ ] Permettre la sélection par statut (Actif, Inactif, En attente)
+- [ ] Afficher le nombre de destinataires par catégorie
+
+### Filtres d'Exclusion
+- [ ] Ajouter la possibilité d'exclure des membres spécifiques
+- [ ] Ajouter un filtre pour exclure les membres sans email
+- [ ] Ajouter un filtre pour exclure les membres inactifs
+- [ ] Afficher la liste des membres exclus
+
+### Aperçu des Destinataires
+- [ ] Afficher la liste complète des destinataires avant envoi
+- [ ] Afficher le nombre total de destinataires
+- [ ] Permettre de modifier la sélection avant envoi
+- [ ] Afficher les emails des destinataires
+
+### Procédures tRPC
+- [ ] Mettre à jour emails.sendMassEmail pour supporter les filtres
+- [ ] Créer une procédure pour récupérer les destinataires filtrés
+- [ ] Ajouter la validation des filtres
+
+### Tests
+- [ ] Tester la sélection des catégories
+- [ ] Tester les filtres d'exclusion
+- [ ] Tester l'aperçu des destinataires
+
+
+## Phase 32 - Fonctionnalités Avancées CRM
+
+### Page CRM Activities
+- [ ] Créer page CRMActivities.tsx pour gérer les activités
+- [ ] Formulaire d'ajout d'activité (type, titre, description, priorité, date d'échéance)
+- [ ] Liste des activités avec filtres (type, statut, priorité)
+- [ ] Modification et suppression d'activités
+- [ ] Affichage du contact associé
+- [ ] Marquage des activités comme complétées
+- [ ] Ajouter la route /crm/activities dans App.tsx
+- [ ] Ajouter le lien dans le menu DashboardLayout
+
+### Rapports CRM Avancés
+- [ ] Créer page CRMReports.tsx avec graphiques
+- [ ] Graphique d'engagement par segment
+- [ ] Graphique de conversion du pipeline d'adhésion
+- [ ] Graphique de tendances mensuelles
+- [ ] Tableau de bord avec métriques clés
+- [ ] Filtres par période (semaine, mois, trimestre, année)
+- [ ] Export des rapports en PDF
+- [ ] Ajouter la route /crm/reports dans App.tsx
+- [ ] Ajouter le lien dans le menu DashboardLayout
+
+### Export des Contacts
+- [ ] Ajouter bouton d'export dans CRMContacts.tsx
+- [ ] Fonction d'export en CSV
+- [ ] Fonction d'export en Excel
+- [ ] Inclure les filtres appliqués dans l'export
+- [ ] Colonnes : Nom, Email, Téléphone, Segment, Statut, Entreprise, Date d'ajout
+- [ ] Téléchargement du fichier
+- [ ] Messages de succès/erreur
+
+### Intégration
+- [ ] Ajouter les routes dans App.tsx
+- [ ] Ajouter les liens dans le menu DashboardLayout
+- [ ] Tester la navigation entre les pages CRM
+
+### Tests
+- [ ] Tests pour la création d'activités
+- [ ] Tests pour la modification d'activités
+- [ ] Tests pour la suppression d'activités
+- [ ] Tests pour les rapports CRM
+- [ ] Tests pour l'export des contacts
+
+
+## Phase 32 - Fonctionnalités Avancées CRM
+
+### Page CRM Activities
+- [x] Créer page CRMActivities.tsx pour gérer les activités
+- [x] Formulaire d'ajout d'activité (type, titre, description, priorité, date d'échéance)
+- [x] Liste des activités avec filtres (type, statut, priorité)
+- [x] Modification et suppression d'activités
+- [x] Affichage du contact associé
+- [x] Marquage des activités comme complétées
+- [x] Ajouter la route /crm/activities dans App.tsx
+- [x] Ajouter le lien dans le menu DashboardLayout
+
+### Rapports CRM Avancés
+- [x] Créer page CRMReports.tsx avec graphiques
+- [x] Graphique d'engagement par segment (camembert)
+- [x] Graphique de conversion du pipeline d'adhésion (histogramme)
+- [x] Graphique de tendances mensuelles (courbe)
+- [x] Tableau de bord avec métriques clés (4 cartes)
+- [x] Filtres par période (semaine, mois, trimestre, année)
+- [x] Graphiques Recharts intégrés
+- [x] Ajouter la route /crm/reports dans App.tsx
+- [x] Ajouter le lien dans le menu DashboardLayout
+
+### Export des Contacts
+- [x] Ajouter bouton d'export dans CRMContacts.tsx
+- [x] Fonction d'export en CSV
+- [x] Fonction d'export en Excel (avec dépendance xlsx)
+- [x] Inclure les filtres appliqués dans l'export
+- [x] Colonnes : ID, Prénom, Nom, Email, Téléphone, Segment, Statut, Entreprise, Date d'ajout, Score d'engagement
+- [x] Téléchargement du fichier
+- [x] Messages de succès/erreur
+
+### Intégration
+- [x] Ajouter les routes dans App.tsx
+- [x] Ajouter les liens dans le menu DashboardLayout
+- [x] Tester la navigation entre les pages CRM
+
+### Tests
+- [x] Tous les 97 tests passent (100% de réussite)
+- [x] Aucune erreur TypeScript
+- [x] Serveur de développement en cours d'exécution
+
+
+## Phase 33 - Intégration du Site Officiel
+
+- [x] Ajouter le lien du site officiel dans la navigation (DashboardLayout)
+- [x] Ajouter le lien dans le menu profil (dropdown)
+- [x] Ajouter un CTA sur la page d'accueil (Home.tsx)
+- [x] Tester les liens et la cohérence
+- [x] Tous les 97 tests passent sans régression
+
+
+## Phase 34 - Améliorations du Tableau de Bord et Pagination
+
+- [x] Ajouter les informations de contact au tableau de bord (Home.tsx)
+- [x] Déplacer le sélecteur de rôle (Dev) dans un collapsible pour le rendre moins visible
+- [x] Créer un composant de pagination réutilisable (Pagination.tsx)
+- [x] Implémenter la pagination dans Members.tsx et Documents.tsx
+- [x] Tester la pagination et vérifier les performances
+- [x] Tous les 97 tests passent sans régression
+
+
+## Phase 35 - Paramètres Globaux et Amélioration Pagination
+
+- [ ] Créer une page de paramètres globaux pour gérer les informations de l'association
+- [ ] Ajouter les options 20 et 100 à la pagination (10, 20, 50, 100)
+- [ ] Intégrer les paramètres globaux dans Home.tsx
+- [ ] Tester les modifications
+
+- [x] Ajouter les options 20 et 100 à la pagination (10, 20, 50, 100)
+- [x] Créer une page de paramètres globaux avec localStorage (GlobalSettings.tsx)
+- [x] Ajouter la fonctionnalité de téléchargement de logo (upload, preview, suppression)
+- [x] Intégrer les paramètres dans App.tsx et DashboardLayout
+- [x] Ajouter les options 20 et 100 à la pagination (10, 20, 50, 100)
+
+
+## Phase 36 - Synchronisation Base de Données
+
+- [x] Ajouter la table globalSettings au schéma Drizzle
+- [x] Créer les procédures tRPC pour gérer les paramètres globaux (get, update)
+- [x] Mettre à jour GlobalSettings.tsx pour utiliser tRPC
+- [x] Tester la synchronisation et les performances
+- [x] Tous les 97 tests passent sans régression
