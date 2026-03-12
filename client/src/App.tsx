@@ -29,14 +29,9 @@ import CRMActivities from "./pages/CRMActivities";
 import CRMReports from "./pages/CRMReports";
 import Settings from "./pages/Settings";
 import GlobalSettings from "./pages/GlobalSettings";
-import Login from "./pages/Login";
-import { useAuth } from "./hooks/useAuth";
+import SimpleLanding from "./pages/SimpleLanding";
 
-function OnlineRouter({ isAuthenticated, onLogout }: any) {
-  if (!isAuthenticated) {
-    return <Login />;
-  }
-
+function DashboardRouter({ onLogout }: any) {
   return (
     <DashboardLayout onLogout={onLogout}>
       <Switch>
@@ -71,22 +66,27 @@ function OnlineRouter({ isAuthenticated, onLogout }: any) {
   );
 }
 
-function Router({ isAuthenticated, onLogout }: any) {
-  return <OnlineRouter isAuthenticated={isAuthenticated} onLogout={onLogout} />;
+function Router({ onLogout }: any) {
+  return (
+    <Switch>
+      <Route path="/" component={SimpleLanding} />
+      <Route path="/:rest*" component={() => <DashboardRouter onLogout={onLogout} />} />
+    </Switch>
+  );
 }
 
 function App() {
-  const { isAuthenticated, logout } = useAuth();
+  const handleLogout = () => {
+    // Simple logout - just redirect to home
+    window.location.href = "/";
+  };
 
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
-          <Router 
-            isAuthenticated={isAuthenticated}
-            onLogout={logout}
-          />
+          <Router onLogout={handleLogout} />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
