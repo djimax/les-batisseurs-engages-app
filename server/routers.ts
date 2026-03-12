@@ -5,6 +5,7 @@ import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import { emailRouter } from "./email-router";
 import { adminSettingsRouter } from "./admin-settings-router";
 import { crmRouter } from "./crm-router";
+import { authRouter } from "./auth-router";
 import { z } from "zod";
 import { 
   getAllCategories, getCategoryById, createCategory, seedDefaultCategories,
@@ -35,14 +36,7 @@ export const appRouter = router({
   adminSettings: adminSettingsRouter,
   crm: crmRouter,
   
-  auth: router({
-    me: publicProcedure.query(opts => opts.ctx.user),
-    logout: publicProcedure.mutation(({ ctx }) => {
-      const cookieOptions = getSessionCookieOptions(ctx.req);
-      ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
-      return { success: true } as const;
-    }),
-  }),
+  auth: authRouter,
 
   // ============ CATEGORIES ============
   categories: router({

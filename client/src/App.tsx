@@ -35,10 +35,11 @@ import CRMReports from "./pages/CRMReports";
 import GlobalSettings from "./pages/GlobalSettings";
 import { usePasswordAuth } from "./hooks/usePasswordAuth";
 import { useState, useEffect } from "react";
+import { trpc } from "@/lib/trpc";
 
-function OnlineRouter({ isAuthenticated, error, onLogin, onLogout, onForgotPassword }: any) {
+function OnlineRouter({ isAuthenticated, onLogout }: any) {
   if (!isAuthenticated) {
-    return <Login onLogin={onLogin} error={error} onForgotPassword={onForgotPassword} />;
+    return <Login />;
   }
 
   return (
@@ -83,7 +84,7 @@ function OfflineRouter() {
   );
 }
 
-function Router({ mode, onChangeMode, isAuthenticated, error, onLogin, onLogout, onForgotPassword }: any) {
+function Router({ mode, onChangeMode, isAuthenticated, onLogout }: any) {
   if (mode === null) {
     return (
       <ModeSelector
@@ -99,7 +100,7 @@ function Router({ mode, onChangeMode, isAuthenticated, error, onLogin, onLogout,
     return <OfflineRouter />;
   }
 
-  return <OnlineRouter isAuthenticated={isAuthenticated} error={error} onLogin={onLogin} onLogout={onLogout} onForgotPassword={onForgotPassword} />;
+  return <OnlineRouter isAuthenticated={isAuthenticated} onLogout={onLogout} />;
 }
 
 function App() {

@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `app_users` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`username` varchar(100) NOT NULL,\n\t`password` text NOT NULL,\n\t`email` varchar(320),\n\t`fullName` varchar(255),\n\t`role` enum('admin','membre') NOT NULL DEFAULT 'membre',\n\t`isActive` boolean NOT NULL DEFAULT true,\n\t`lastLogin` timestamp,\n\t`createdBy` int,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `app_users_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `app_users_username_unique` UNIQUE(`username`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3bbsoHsjBXcEHkp.root --database 7FbBRroWbzQLeSeXJbRaVU --execute CREATE TABLE IF NOT EXISTS `app_users` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`username` varchar(100) NOT NULL,\n\t`password` text NOT NULL,\n\t`email` varchar(320),\n\t`fullName` varchar(255),\n\t`role` enum('admin','membre') NOT NULL DEFAULT 'membre',\n\t`isActive` boolean NOT NULL DEFAULT true,\n\t`lastLogin` timestamp,\n\t`createdBy` int,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `app_users_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `app_users_username_unique` UNIQUE(`username`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 630
+}

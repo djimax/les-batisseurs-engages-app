@@ -310,13 +310,12 @@ export type InsertEvent = typeof events.$inferInsert;
 
 
 /**
- * Application users table - for managing usernames and passwords
+ * Application users table - for managing email/password authentication
  */
 export const appUsers = mysqlTable("app_users", {
   id: int("id").autoincrement().primaryKey(),
-  username: varchar("username", { length: 100 }).notNull().unique(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
   password: text("password").notNull(), // Hashed password
-  email: varchar("email", { length: 320 }),
   fullName: varchar("fullName", { length: 255 }),
   role: mysqlEnum("role", ["admin", "membre"]).default("membre").notNull(),
   isActive: boolean("isActive").default(true).notNull(),
