@@ -1,12 +1,9 @@
-import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 
 export default function SimpleLanding() {
-  const [, setLocation] = useLocation();
-
   const handleEnter = () => {
-    setLocation("/");
+    window.location.href = "/documents";
   };
 
   return (
@@ -36,13 +33,13 @@ export default function SimpleLanding() {
           Connectez-vous pour accéder à vos documents et gérer votre association.
         </p>
 
-        <Button
-          onClick={handleEnter}
-          size="lg"
-          className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-6 text-lg rounded-lg shadow-lg"
-        >
-          Accéder au tableau de bord
-        </Button>
+      <Button
+        onClick={handleEnter}
+        size="lg"
+        className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
+      >
+        Accéder au tableau de bord
+      </Button>
       </div>
     </div>
   );

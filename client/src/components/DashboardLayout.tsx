@@ -91,44 +91,9 @@ export default function DashboardLayout({
     const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
     return saved ? parseInt(saved, 10) : DEFAULT_WIDTH;
   });
-  const { loading, user } = useAuthHook();
-
   useEffect(() => {
     localStorage.setItem(SIDEBAR_WIDTH_KEY, sidebarWidth.toString());
   }, [sidebarWidth]);
-
-  if (loading) {
-    return <DashboardLayoutSkeleton />
-  }
-
-  if (!user) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/10">
-        <div className="flex flex-col items-center gap-8 p-8 max-w-md w-full">
-          <div className="flex flex-col items-center gap-4">
-            <div className="flex items-center gap-3 mb-4">
-              <img src="/logo.png" alt="Les Batisseurs Engages" className="w-16 h-16 object-contain" />
-            </div>
-            <h1 className="text-2xl font-bold tracking-tight text-center">
-              Les Bâtisseurs Engagés
-            </h1>
-            <p className="text-sm text-muted-foreground text-center max-w-sm">
-              Plateforme de gestion documentaire pour associations. Connectez-vous pour accéder à vos documents.
-            </p>
-          </div>
-          <Button
-            onClick={() => {
-              window.location.href = getLoginUrl();
-            }}
-            size="lg"
-            className="w-full shadow-lg hover:shadow-xl transition-all"
-          >
-            Se connecter
-          </Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <SidebarProvider
@@ -156,7 +121,7 @@ function DashboardLayoutContent({
   setSidebarWidth,
   onLogout,
 }: DashboardLayoutContentProps) {
-  const { user, logout } = useAuthHook() as any;
+  const { logout } = useAuthHook() as any;
   const handleLogout = onLogout || logout;
   const [location, setLocation] = useLocation();
   const { state, toggleSidebar } = useSidebar();
@@ -233,9 +198,7 @@ function DashboardLayoutContent({
           <SidebarContent className="gap-0 pt-2">
             <SidebarMenu className="px-2 py-1">
               {menuItems.filter(item => {
-                if (item.adminOnly && user?.role !== "admin") {
-                  return false;
-                }
+                // Afficher tous les éléments sans vérifier le rôle
                 return true;
               }).map(item => {
                 const isActive = location === item.path;
@@ -265,15 +228,15 @@ function DashboardLayoutContent({
                 <button className="flex items-center gap-3 rounded-lg px-1 py-1 hover:bg-primary/80 transition-colors w-full text-left group-data-[collapsible=icon]:justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
                   <Avatar className="h-9 w-9 border shrink-0 bg-accent">
                     <AvatarFallback className="text-xs font-medium bg-accent text-primary">
-                      {user?.name?.charAt(0).toUpperCase() || "U"}
+                      A
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0 group-data-[collapsible=icon]:hidden">
                     <p className="text-sm font-medium truncate leading-none text-white">
-                      {user?.name || "Utilisateur"}
+                      Admin
                     </p>
                     <p className="text-xs text-white/60 truncate mt-1.5">
-                      {user?.email || "-"}
+                      admin@test.fr
                     </p>
                   </div>
                 </button>

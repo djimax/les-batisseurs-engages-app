@@ -6,6 +6,7 @@ import { emailRouter } from "./email-router";
 import { adminSettingsRouter } from "./admin-settings-router";
 import { crmRouter } from "./crm-router";
 import { authRouter } from "./auth-router";
+import { usersRouter } from "./users-router";
 import { z } from "zod";
 import { 
   getAllCategories, getCategoryById, createCategory, seedDefaultCategories,
@@ -35,8 +36,8 @@ export const appRouter = router({
   email: emailRouter,
   adminSettings: adminSettingsRouter,
   crm: crmRouter,
-  
   auth: authRouter,
+  users: usersRouter,
 
   // ============ CATEGORIES ============
   categories: router({
