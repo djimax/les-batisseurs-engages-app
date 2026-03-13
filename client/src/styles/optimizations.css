@@ -1,0 +1,178 @@
+/* Optimisations Globales pour les Performances */
+
+/* Réduire les animations au chargement */
+@media (prefers-reduced-motion: no-preference) {
+  /* Animations rapides et fluides */
+  * {
+    animation-duration: 0.15s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* Désactiver les animations au chargement initial */
+.animate-fade-in-up,
+.animate-slide-in-right,
+.animate-pulse {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+/* Transitions rapides */
+.transition-all,
+.transition {
+  transition-duration: 150ms !important;
+}
+
+/* Optimiser les skeletons */
+.skeleton {
+  animation: none !important;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+}
+
+/* Optimiser le scrollbar du sidebar */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-primary\/40 {
+  scrollbar-color: rgba(59, 130, 246, 0.4) rgba(59, 130, 246, 0.1);
+}
+
+.scrollbar-thumb-primary\/60::-webkit-scrollbar-thumb {
+  background-color: rgba(59, 130, 246, 0.6);
+}
+
+/* Optimiser les cartes */
+.card {
+  will-change: auto;
+}
+
+/* Réduire les ombres pour les performances */
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* Optimiser les transitions de hover */
+button:hover,
+a:hover {
+  transition: all 150ms ease-in-out;
+}
+
+/* Désactiver les animations de chargement */
+@keyframes fade-in-up {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Optimiser le rendu des graphiques */
+svg {
+  will-change: auto;
+}
+
+/* Réduire les reflows et repaints */
+.sidebar-content {
+  contain: layout style paint;
+}
+
+/* Optimiser les images */
+img {
+  will-change: auto;
+}
+
+/* Désactiver les animations de fade-in */
+.fade-in-up {
+  animation: none !important;
+}
+
+.delay-1,
+.delay-2,
+.delay-3,
+.delay-4 {
+  animation-delay: 0s !important;
+}
+
+/* Optimiser le rendu du texte */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Réduire les transitions des éléments de formulaire */
+input,
+select,
+textarea {
+  transition: border-color 150ms ease-in-out, box-shadow 150ms ease-in-out;
+}
+
+/* Optimiser les transitions des boutons */
+button {
+  transition: all 150ms ease-in-out;
+}
+
+/* Réduire les animations des modales */
+[role="dialog"] {
+  animation: none !important;
+}
+
+/* Optimiser le rendu des listes */
+ul,
+ol {
+  contain: layout style;
+}
+
+/* Réduire les animations des badges */
+.badge {
+  animation: none !important;
+}
+
+/* Optimiser les transitions des onglets */
+[role="tablist"] {
+  transition: none;
+}
+
+[role="tab"] {
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+}
+
+/* Désactiver les animations de chargement des skeletons */
+.skeleton {
+  background: #f0f0f0;
+  animation: none !important;
+}
+
+/* Optimiser le rendu des cartes de statistiques */
+.stat-card {
+  will-change: auto;
+  contain: layout style paint;
+}

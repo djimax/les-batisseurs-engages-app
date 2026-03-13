@@ -200,7 +200,7 @@ export default function AuditHistory() {
         </div>
 
         {/* Filters */}
-        <Card className="shadow-lg border-0 backdrop-blur-sm bg-white/95 dark:bg-slate-900/95 animate-fade-in-up delay-1">
+        <Card className="shadow-lg border-0 backdrop-blur-sm bg-white/95 dark:bg-slate-900/95">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Filter className="h-5 w-5" />
@@ -278,7 +278,7 @@ export default function AuditHistory() {
         </Card>
 
         {/* Audit Logs */}
-        <div className="space-y-3 animate-fade-in-up delay-2">
+        <div className="space-y-3">
           {isLoading ? (
             <Card className="shadow-lg border-0 backdrop-blur-sm bg-white/95 dark:bg-slate-900/95">
               <CardContent className="p-8 text-center">
@@ -297,8 +297,8 @@ export default function AuditHistory() {
             filteredLogs.map((log, index) => (
               <Card
                 key={log.id}
-                className="shadow-lg border-0 backdrop-blur-sm bg-white/95 dark:bg-slate-900/95 hover:shadow-xl transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${index * 50}ms` }}
+                className="shadow-lg border-0 backdrop-blur-sm bg-white/95 dark:bg-slate-900/95 hover:shadow-xl transition-all duration-300"
+               
               >
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between">
@@ -354,7 +354,7 @@ export default function AuditHistory() {
 
         {/* Summary */}
         {filteredLogs.length > 0 && (
-          <Card className="shadow-lg border-0 backdrop-blur-sm bg-white/95 dark:bg-slate-900/95 animate-fade-in-up delay-3">
+          <Card className="shadow-lg border-0 backdrop-blur-sm bg-white/95 dark:bg-slate-900/95">
             <CardHeader>
               <CardTitle>Résumé</CardTitle>
             </CardHeader>

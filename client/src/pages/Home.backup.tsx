@@ -1,7 +1,7 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   FileText, 
   CheckCircle2, 
@@ -101,7 +101,7 @@ export default function Home() {
 
   return (
     <div className="space-y-8">
-      {/* HERO SECTION - Optimisé : animation réduite */}
+      {/* HERO SECTION */}
       <div className="gradient-hero rounded-3xl p-8 text-white shadow-2xl">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="space-y-3">
@@ -137,7 +137,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3">
             <Button 
               onClick={() => setLocation("/documents")} 
-              className="bg-white text-blue-600 hover:bg-blue-50 gap-2 shadow-lg h-12 px-6"
+              className="bg-white text-blue-600 hover:bg-blue-50 gap-2 shadow-lg btn-glow h-12 px-6"
               size="lg"
             >
               <FolderOpen className="h-5 w-5" />
@@ -203,7 +203,7 @@ export default function Home() {
         </Card>
       </div>
 
-      {/* STATS GRID - Optimisé : animations réduites, skeletons plus rapides */}
+      {/* STATS GRID */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
           <TrendingUp className="h-6 w-6 text-primary" />
@@ -213,7 +213,7 @@ export default function Home() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {statsLoading ? (
             Array.from({ length: 4 }).map((_, i) => (
-              <Card key={i}>
+              <Card key={i} className="animate-fade-in-up">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <Skeleton className="h-4 w-24" />
                   <Skeleton className="h-10 w-10 rounded-xl" />
@@ -231,6 +231,7 @@ export default function Home() {
                 <Card 
                   key={index} 
                   className="hover:shadow-lg transition-all cursor-pointer hover:scale-105"
+                 
                   onClick={() => setLocation("/documents")}
                 >
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -258,75 +259,99 @@ export default function Home() {
       </div>
 
       {/* RECENT DOCUMENTS */}
-      {!documentsLoading && recentDocs.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
-              <FileText className="h-6 w-6 text-primary" />
-              Documents Récents
-            </h2>
-            <Button 
-              variant="ghost" 
-              onClick={() => setLocation("/documents")}
-              className="gap-2"
-            >
-              Voir tous <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
-          
-          <div className="space-y-2">
-            {recentDocs.map((doc) => (
-              <Card key={doc.id} className="hover:shadow-md transition-shadow cursor-pointer">
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
+            <FileText className="h-6 w-6 text-primary" />
+            Documents Récents
+          </h2>
+          <Button 
+            onClick={() => setLocation("/documents")}
+            variant="outline" 
+            size="sm"
+            className="gap-2"
+          >
+            Voir tous <ArrowRight className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {documentsLoading ? (
+          <div className="grid gap-4">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <Card key={i}>
                 <CardContent className="pt-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3 flex-1">
-                      <FileText className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium truncate">{doc.name}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {doc.category?.name || "Sans catégorie"}
-                        </p>
+                  <Skeleton className="h-4 w-full mb-2" />
+                  <Skeleton className="h-3 w-3/4" />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : recentDocs.length > 0 ? (
+          <div className="grid gap-4">
+            {recentDocs.map((doc) => (
+              <Card 
+                key={doc.id}
+                className="hover:shadow-md transition-all cursor-pointer"
+                onClick={() => setLocation(`/documents`)}
+              >
+                <CardContent className="pt-6">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <p className="font-semibold text-base mb-1">{doc.title}</p>
+                      <p className="text-sm text-muted-foreground mb-2">{doc.description}</p>
+                      <div className="flex gap-2">
+                        {getStatusBadge(doc.status)}
+                        {getPriorityBadge(doc.priority)}
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 ml-4">
-                      {getPriorityBadge(doc.priority)}
-                      {getStatusBadge(doc.status)}
-                    </div>
+                    <FileText className="h-8 w-8 text-muted-foreground flex-shrink-0" />
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <Card>
+            <CardContent className="pt-6 text-center">
+              <p className="text-muted-foreground">Aucun document pour le moment</p>
+              <Button 
+                onClick={() => setLocation("/documents")}
+                className="mt-4"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                Créer un document
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+      </div>
 
-      {/* URGENT DOCUMENTS ALERT */}
-      {!documentsLoading && urgentDocs.length > 0 && (
+      {/* URGENT DOCUMENTS */}
+      {urgentDocs.length > 0 && (
         <div className="space-y-4">
-          <div className="flex items-center gap-2 text-amber-700 dark:text-amber-400">
+          <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2 text-red-600">
             <AlertTriangle className="h-6 w-6" />
-            <h2 className="text-2xl font-bold tracking-tight">
-              Documents Urgents
-            </h2>
-          </div>
-          
-          <div className="space-y-2">
-            {urgentDocs.slice(0, 3).map((doc) => (
-              <Card key={doc.id} className="border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/20 hover:shadow-md transition-shadow cursor-pointer">
+            Documents Urgents
+          </h2>
+
+          <div className="grid gap-4">
+            {urgentDocs.map((doc) => (
+              <Card 
+                key={doc.id}
+                className="border-red-200 bg-red-50 dark:bg-red-950/30 hover:shadow-md transition-all cursor-pointer"
+                onClick={() => setLocation(`/documents`)}
+              >
                 <CardContent className="pt-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3 flex-1">
-                      <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium truncate">{doc.name}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {doc.category?.name || "Sans catégorie"}
-                        </p>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <p className="font-semibold text-base mb-1">{doc.title}</p>
+                      <p className="text-sm text-muted-foreground mb-2">{doc.description}</p>
+                      <div className="flex gap-2">
+                        {getStatusBadge(doc.status)}
+                        {getPriorityBadge(doc.priority)}
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 ml-4">
-                      {getStatusBadge(doc.status)}
-                    </div>
+                    <AlertTriangle className="h-8 w-8 text-red-600 flex-shrink-0" />
                   </div>
                 </CardContent>
               </Card>
@@ -338,36 +363,36 @@ export default function Home() {
       {/* QUICK ACTIONS */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
-          <Plus className="h-6 w-6 text-primary" />
+          <Sparkles className="h-6 w-6 text-primary" />
           Actions Rapides
         </h2>
-        
-        <div className="grid gap-4 md:grid-cols-3">
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Button 
             onClick={() => setLocation("/documents")}
-            variant="outline"
-            className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+            className="h-24 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
+            size="lg"
           >
-            <FileText className="h-6 w-6 text-blue-600" />
-            <span>Ajouter un Document</span>
+            <FileText className="h-6 w-6" />
+            <span>Voir Documents</span>
           </Button>
-          
+
           <Button 
             onClick={() => setLocation("/members")}
-            variant="outline"
-            className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-emerald-50 dark:hover:bg-emerald-950/30"
+            className="h-24 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700"
+            size="lg"
           >
-            <Users className="h-6 w-6 text-emerald-600" />
-            <span>Gérer les Membres</span>
+            <Users className="h-6 w-6" />
+            <span>Gérer Membres</span>
           </Button>
-          
+
           <Button 
             onClick={() => setLocation("/finance")}
-            variant="outline"
-            className="h-24 flex flex-col items-center justify-center gap-2 hover:bg-amber-50 dark:hover:bg-amber-950/30"
+            className="h-24 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"
+            size="lg"
           >
-            <TrendingUp className="h-6 w-6 text-amber-600" />
-            <span>Voir les Finances</span>
+            <TrendingUp className="h-6 w-6" />
+            <span>Finances</span>
           </Button>
         </div>
       </div>

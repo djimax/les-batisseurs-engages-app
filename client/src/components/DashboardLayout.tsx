@@ -195,7 +195,7 @@ function DashboardLayoutContent({
             </div>
           </SidebarHeader>
 
-          <SidebarContent className="gap-0 pt-2">
+          <SidebarContent className="gap-0 pt-2 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-primary/10 hover:scrollbar-thumb-primary/60">
             <SidebarMenu className="px-2 py-1">
               {menuItems.filter(item => {
                 // Afficher tous les éléments sans vérifier le rôle

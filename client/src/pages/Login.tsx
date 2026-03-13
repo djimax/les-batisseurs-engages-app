@@ -50,19 +50,19 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-slate-50 to-blue-100 dark:from-blue-950 dark:via-slate-950 dark:to-blue-900 px-4 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 dark:bg-blue-900/30 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-300 dark:bg-blue-800/30 rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: "1s" }}></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200 dark:bg-blue-900/30 rounded-full blur-3xl opacity-20"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-300 dark:bg-blue-800/30 rounded-full blur-3xl opacity-20"></div>
       </div>
 
       <div className="relative z-10 w-full max-w-md">
         <Card className="shadow-2xl border-0 backdrop-blur-sm bg-white/95 dark:bg-slate-900/95">
           <CardHeader className="space-y-4 text-center pb-8">
-            <div className="flex justify-center mb-4 animate-fade-in-up">
+            <div className="flex justify-center mb-4">
               <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg">
                 <img src="/logo.png" alt="Les Bâtisseurs Engagés" className="h-12 w-12" />
               </div>
             </div>
-            <div className="space-y-2 animate-fade-in-up delay-1">
+            <div className="space-y-2">
               <div className="flex items-center justify-center gap-2">
                 <Sparkles className="h-5 w-5 text-blue-600" />
                 <CardTitle className="text-3xl bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
@@ -75,7 +75,7 @@ export default function Login() {
             </div>
           </CardHeader>
 
-          <CardContent className="animate-fade-in-up delay-2">
+          <CardContent className="animate-fade-in-up">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                 {form.formState.errors.email || form.formState.errors.password ? (

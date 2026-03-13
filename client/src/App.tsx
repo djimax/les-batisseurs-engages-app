@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
+import "@/styles/optimizations.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
@@ -31,6 +32,7 @@ import Settings from "./pages/Settings";
 import GlobalSettings from "./pages/GlobalSettings";
 import Categories from "./pages/Categories";
 import PublicLanding from "./pages/PublicLanding";
+import InternalLogin from "./pages/InternalLogin";
 
 function App() {
   const handleLogout = () => {
@@ -45,6 +47,7 @@ function App() {
           <Toaster />
           <Switch>
             <Route path="/public" component={PublicLanding} />
+            <Route path="/login" component={InternalLogin} />
             <Route>
               <DashboardLayout onLogout={handleLogout}>
                 <Switch>
