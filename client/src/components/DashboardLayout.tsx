@@ -242,10 +242,10 @@ function DashboardLayoutContent({
 
   return (
     <>
-      <div className="relative" ref={sidebarRef}>
+      <div className="flex h-screen" ref={sidebarRef}>
         <Sidebar
           collapsible="icon"
-          className="border-r-0"
+          className="border-r-0 flex-shrink-0"
           disableTransition={isResizing}
         >
           <SidebarHeader className="h-16 justify-center border-b border-primary/20">
@@ -400,8 +400,8 @@ function DashboardLayoutContent({
           />
         </Sidebar>
 
-        <SidebarInset className="flex flex-col">
-          <header className="sticky top-0 z-40 flex items-center gap-4 border-b border-primary/20 bg-white/95 dark:bg-slate-950/95 backdrop-blur-sm px-6 py-4 h-16">
+        <SidebarInset className="flex flex-col flex-1 overflow-hidden">
+          <header className="sticky top-0 z-40 flex items-center gap-4 border-b border-primary/20 bg-white/95 dark:bg-slate-950/95 backdrop-blur-sm px-6 py-4 h-16 flex-shrink-0">
             <SidebarTrigger className="-ml-1" />
             <div className="flex-1">
               <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
