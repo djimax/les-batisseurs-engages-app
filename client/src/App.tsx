@@ -30,6 +30,7 @@ import CRMReports from "./pages/CRMReports";
 import Settings from "./pages/Settings";
 import GlobalSettings from "./pages/GlobalSettings";
 import Categories from "./pages/Categories";
+import PublicLanding from "./pages/PublicLanding";
 
 function App() {
   const handleLogout = () => {
@@ -42,35 +43,40 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
-          <DashboardLayout onLogout={handleLogout}>
-            <Switch>
-              <Route path="/" component={Home} />
-              <Route path="/documents" component={Documents} />
-              <Route path="/categories" component={Categories} />
-              <Route path="/members" component={Members} />
-              <Route path="/users" component={Users} />
-              <Route path="/finance" component={Finance} />
-              <Route path="/activity" component={Activity} />
-              <Route path="/archives" component={Archives} />
-              <Route path="/campaigns" component={Campaigns} />
-              <Route path="/adhesions" component={Adhesions} />
-              <Route path="/events" component={Events} />
-              <Route path="/admin-portal" component={AdminPortal} />
-              <Route path="/announcements" component={Announcements} />
-              <Route path="/email-composer" component={EmailComposer} />
-              <Route path="/audit-history" component={AuditHistory} />
-              <Route path="/admin/roles" component={AdminRoles} />
-              <Route path="/admin/audit-logs" component={AdminAuditLogs} />
-              <Route path="/admin/settings" component={AdminSettings} />
-              <Route path="/crm" component={CRMDashboard} />
-              <Route path="/crm/contacts" component={CRMContacts} />
-              <Route path="/crm/activities" component={CRMActivities} />
-              <Route path="/crm/reports" component={CRMReports} />
-              <Route path="/settings" component={Settings} />
-              <Route path="/global-settings" component={GlobalSettings} />
-              <Route component={NotFound} />
-            </Switch>
-          </DashboardLayout>
+          <Switch>
+            <Route path="/public" component={PublicLanding} />
+            <Route>
+              <DashboardLayout onLogout={handleLogout}>
+                <Switch>
+                  <Route path="/" component={Home} />
+                  <Route path="/documents" component={Documents} />
+                  <Route path="/categories" component={Categories} />
+                  <Route path="/members" component={Members} />
+                  <Route path="/users" component={Users} />
+                  <Route path="/finance" component={Finance} />
+                  <Route path="/activity" component={Activity} />
+                  <Route path="/archives" component={Archives} />
+                  <Route path="/campaigns" component={Campaigns} />
+                  <Route path="/adhesions" component={Adhesions} />
+                  <Route path="/events" component={Events} />
+                  <Route path="/admin-portal" component={AdminPortal} />
+                  <Route path="/announcements" component={Announcements} />
+                  <Route path="/email-composer" component={EmailComposer} />
+                  <Route path="/audit-history" component={AuditHistory} />
+                  <Route path="/admin/roles" component={AdminRoles} />
+                  <Route path="/admin/audit-logs" component={AdminAuditLogs} />
+                  <Route path="/admin/settings" component={AdminSettings} />
+                  <Route path="/crm" component={CRMDashboard} />
+                  <Route path="/crm/contacts" component={CRMContacts} />
+                  <Route path="/crm/activities" component={CRMActivities} />
+                  <Route path="/crm/reports" component={CRMReports} />
+                  <Route path="/settings" component={Settings} />
+                  <Route path="/global-settings" component={GlobalSettings} />
+                  <Route component={NotFound} />
+                </Switch>
+              </DashboardLayout>
+            </Route>
+          </Switch>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
