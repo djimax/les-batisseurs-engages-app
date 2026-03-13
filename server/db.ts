@@ -159,8 +159,13 @@ export async function seedDefaultCategories() {
   const db = await getDb();
   if (!db) return;
   
-  const existing = await db.select().from(categories).limit(1);
-  if (existing.length > 0) return;
+  try {
+    const existing = await db.select().from(categories);
+    if (existing.length > 0) return;
+  } catch (error) {
+    console.warn("[Database] Error checking categories:", error);
+    return;
+  }
 
   const defaultCategories: InsertCategory[] = [
     { name: "Documents Juridiques", slug: "juridique", description: "Statuts, règlements, autorisations", color: "#e76f51", icon: "scale", sortOrder: 1 },
