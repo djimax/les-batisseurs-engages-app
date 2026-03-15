@@ -4,13 +4,10 @@
   "installCommand": "pnpm install",
   "framework": "vite",
   "outputDirectory": "dist",
-  "env": [
-    "DATABASE_URL",
-    "VITE_API_URL",
-    "VITE_OAUTH_GITHUB_ID",
-    "VITE_OAUTH_GITHUB_SECRET",
-    "NODE_ENV"
-  ],
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "NODE_ENV": "production"
+  },
   "functions": {
     "server/**/*.ts": {
       "memory": 1024,
