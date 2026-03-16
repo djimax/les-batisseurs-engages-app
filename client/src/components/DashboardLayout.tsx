@@ -50,8 +50,8 @@ import { useLocation } from "wouter";
 import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 import { useAuth as useAuthHook } from "@/_core/hooks/useAuth";
-import { Avatar, AvatarFallback } from "./ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { trpc } from "@/lib/trpc";
 
 interface MenuItem {
   icon: any;
@@ -189,6 +189,9 @@ function DashboardLayoutContent({
     new Set(["Tableau de bord", "👥 Gestion des Membres", "💰 Finances & Campagnes"])
   );
   const isMobile = useIsMobile();
+  
+  // Charger les paramètres globaux en temps réel
+  const { data: settings } = trpc.globalSettings.get.useQuery();
 
   useEffect(() => {
     if (isCollapsed) {
@@ -259,9 +262,13 @@ function DashboardLayoutContent({
               </button>
               {!isCollapsed ? (
                 <div className="flex items-center gap-2 min-w-0">
-                  <img src="/logo.png" alt="Logo" className="w-8 h-8 object-contain shrink-0" />
+                  {settings?.logo ? (
+                    <img src={settings.logo} alt="Logo" className="w-8 h-8 object-contain shrink-0" />
+                  ) : (
+                    <img src="/logo.png" alt="Logo" className="w-8 h-8 object-contain shrink-0" />
+                  )}
                   <span className="font-semibold tracking-tight truncate text-sm text-white">
-                    Bâtisseurs Engagés
+                    {settings?.associationName || "Bâtisseurs Engagés"}
                   </span>
                 </div>
               ) : null}

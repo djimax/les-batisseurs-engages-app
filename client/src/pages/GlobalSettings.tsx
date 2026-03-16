@@ -86,10 +86,13 @@ export default function GlobalSettings() {
         ...formData,
         logo: logoPreview,
       });
-      toast.success("Paramètres sauvegardés avec succès");
+      toast.success("Paramètres modifiés avec succès");
+      // Invalider le cache pour mettre à jour immédiatement le tableau de bord
+      const utils = trpc.useUtils();
+      await utils.globalSettings.get.invalidate();
       refetch();
     } catch (error) {
-      toast.error("Erreur lors de la sauvegarde");
+      toast.error("Erreur lors de la modification");
       console.error(error);
     } finally {
       setIsSaving(false);
@@ -304,12 +307,12 @@ export default function GlobalSettings() {
                 {isSaving || updateMutation.isPending ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Sauvegarde...
+                    Modification...
                   </>
                 ) : (
                   <>
                     <Save className="h-4 w-4" />
-                    Sauvegarder
+                    Modifier
                   </>
                 )}
               </Button>
