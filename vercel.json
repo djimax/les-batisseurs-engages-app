@@ -4,21 +4,11 @@
   "installCommand": "pnpm install",
   "framework": "vite",
   "outputDirectory": "dist",
-"env": {
-  "DATABASE_URL": "mysql://496d3Za9YQK2ig3.root:HdxCope1Qy92FX8v@gateway01.eu-central-1.prod.aws.tidbcloud.com:4000/sys",
-  "NODE_ENV": "production"
-},
-  "functions": {
-    "server/**/*.ts": {
-      "memory": 1024,
-      "maxDuration": 60
-    }
+  "env": {
+    "DATABASE_URL": "mysql://496d3Za9YQK2ig3.root:HdxCope1Qy92FX8v@gateway01.eu-central-1.prod.aws.tidbcloud.com:4000/sys",
+    "NODE_ENV": "production"
   },
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/server/api/$1"
-    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
@@ -57,5 +47,3 @@
     }
   ]
 }
-
-
