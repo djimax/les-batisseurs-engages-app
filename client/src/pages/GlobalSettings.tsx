@@ -129,18 +129,21 @@ export default function GlobalSettings() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="w-full min-h-screen overflow-hidden flex flex-col">
       {/* Hero Section */}
-      <HeroSection
-        title="Paramètres Globaux"
-        subtitle="Gérez les informations de votre association"
-        icon="⚙️"
-        variant="accent"
-      />
+      <div className="overflow-hidden">
+        <HeroSection
+          title="Paramètres Globaux"
+          subtitle="Gérez les informations de votre association"
+          icon="⚙️"
+          variant="accent"
+        />
+      </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        {/* Logo Section */}
-        <Card className="lg:col-span-1">
+      <div className="flex-1 overflow-y-auto w-full">
+        <div className="grid gap-6 lg:grid-cols-3 px-6 py-6 w-full">
+          {/* Logo Section */}
+          <Card className="lg:col-span-1">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Upload className="h-5 w-5" />
@@ -327,17 +330,18 @@ export default function GlobalSettings() {
             </div>
           </CardContent>
         </Card>
-      </div>
 
-      {/* Info Box */}
-      <Card className="bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800">
-        <CardContent className="pt-6">
-          <p className="text-sm text-blue-900 dark:text-blue-100">
-            <strong>ℹ️ Note :</strong> Les paramètres sont synchronisés avec la base de données. 
-            Ils seront utilisés pour afficher les informations de l'association sur la page d'accueil et dans le tableau de bord.
-          </p>
-        </CardContent>
-      </Card>
+          {/* Info Box */}
+          <Card className="bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800 lg:col-span-2">
+            <CardContent className="pt-6">
+              <p className="text-sm text-blue-900 dark:text-blue-100">
+                <strong>ℹ️ Note :</strong> Les paramètres sont synchronisés avec la base de données. 
+                Ils seront utilisés pour afficher les informations de l'association sur la page d'accueil et dans le tableau de bord.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

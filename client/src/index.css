@@ -172,10 +172,32 @@
 
 @layer base {
   * {
+    box-sizing: border-box;
     @apply border-border outline-ring/50;
   }
+  html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    /* Hide scrollbar but allow scrolling */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  html::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
   body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
     @apply bg-background text-foreground;
+  }
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -215,7 +237,7 @@
     .container {
       padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1400px;
+      max-width: 100%;
     }
   }
 }
@@ -490,4 +512,16 @@
 
 .blur-effect-xl {
   filter: blur(150px);
+}
+
+
+/* Hide horizontal scrollbar while keeping vertical scrollbar */
+.overflow-x-hidden {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }

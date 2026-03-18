@@ -245,7 +245,7 @@ function DashboardLayoutContent({
 
   return (
     <>
-      <div className="flex h-screen" ref={sidebarRef}>
+      <div className="flex h-screen w-screen overflow-hidden" ref={sidebarRef}>
         <Sidebar
           collapsible="icon"
           className="border-r-0 flex-shrink-0"
@@ -417,7 +417,7 @@ function DashboardLayoutContent({
             </div>
           </header>
 
-          <main className="flex-1 overflow-auto p-6">
+          <main className="flex-1 overflow-auto px-6 py-6 w-full">
             {children}
           </main>
         </SidebarInset>

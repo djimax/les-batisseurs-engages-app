@@ -48,6 +48,7 @@ function App() {
           <Switch>
             <Route path="/public" component={PublicLanding} />
             <Route path="/login" component={InternalLogin} />
+            <Route path="/global-settings" component={GlobalSettings} />
             <Route>
               <DashboardLayout onLogout={handleLogout}>
                 <Switch>
@@ -74,7 +75,6 @@ function App() {
                   <Route path="/crm/activities" component={CRMActivities} />
                   <Route path="/crm/reports" component={CRMReports} />
                   <Route path="/settings" component={Settings} />
-                  <Route path="/global-settings" component={GlobalSettings} />
                   <Route component={NotFound} />
                 </Switch>
               </DashboardLayout>
