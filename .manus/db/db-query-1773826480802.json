@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO `global_settings` (`associationName`, `seatCity`, `folio`, `email`, `website`, `phone`, `description`, `createdAt`, `updatedAt`) \nVALUES ('Les Bâtisseurs Engagés', 'N\\'djaména, Tchad', '10512', 'contact.lesbatisseursengages@gmail.com', 'www.lesbatisseursengage.com', '+235 62 123 456', 'Association pour le développement communautaire', NOW(), NOW());\n\nINSERT INTO `documents` (`title`, `description`, `categoryId`, `status`, `priority`, `createdAt`, `updatedAt`) \nVALUES ('Document de test', 'Ceci est un document de test', 1, 'pending', 'medium', NOW(), NOW());",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3bbsoHsjBXcEHkp.root --database 7FbBRroWbzQLeSeXJbRaVU --execute INSERT INTO `global_settings` (`associationName`, `seatCity`, `folio`, `email`, `website`, `phone`, `description`, `createdAt`, `updatedAt`) \nVALUES ('Les Bâtisseurs Engagés', 'N\\'djaména, Tchad', '10512', 'contact.lesbatisseursengages@gmail.com', 'www.lesbatisseursengage.com', '+235 62 123 456', 'Association pour le développement communautaire', NOW(), NOW());\n\nINSERT INTO `documents` (`title`, `description`, `categoryId`, `status`, `priority`, `createdAt`, `updatedAt`) \nVALUES ('Document de test', 'Ceci est un document de test', 1, 'pending', 'medium', NOW(), NOW());",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 439
+}
