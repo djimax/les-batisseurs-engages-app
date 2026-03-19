@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { HeroSection } from "@/components/HeroSection";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,10 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Settings, Upload, Save, RotateCcw, Mail, Globe, MapPin, FileText, Loader2 } from "lucide-react";
+import { Settings, Upload, Save, RotateCcw, Mail, Globe, MapPin, FileText, Loader2, ArrowLeft } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 
 export default function GlobalSettings() {
+  const [, setLocation] = useLocation();
   const [isSaving, setIsSaving] = useState(false);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   
@@ -138,6 +140,19 @@ export default function GlobalSettings() {
           icon="⚙️"
           variant="accent"
         />
+      </div>
+
+      {/* Bouton de retour */}
+      <div className="px-6 py-4 border-b border-border">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setLocation("/")}
+          className="gap-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Retour au tableau de bord
+        </Button>
       </div>
 
       <div className="flex-1 overflow-y-auto w-full">
