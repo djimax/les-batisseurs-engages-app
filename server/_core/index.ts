@@ -1,65 +1,115 @@
-import "dotenv/config";
+/**
+ * server/_core/index.ts — Point d'entrée serveur adapté Railway
+ *
+ * INSTALLATION : remplace server/_core/index.ts
+ *
+ * Changements vs version originale :
+ * - Utilise process.env.PORT (Railway injecte le port automatiquement)
+ * - Crée un httpServer HTTP explicite (nécessaire pour WebSocket)
+ * - Appelle setupWebSocket(httpServer)
+ * - CORS configuré pour accepter le domaine Vercel du frontend
+ * - Graceful shutdown sur SIGTERM (Railway envoie ce signal à l'arrêt)
+ */
+
 import express from "express";
-import { createServer } from "http";
-import net from "net";
+import http from "http";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { registerOAuthRoutes } from "./oauth";
-import { appRouter } from "../routers";
-import { createContext } from "./context";
-import { serveStatic, setupVite } from "./vite";
+import { appRouter } from "./router";        // votre router tRPC existant
+import { createContext } from "./trpc";       // votre createContext existant
+import { setupWebSocket } from "./websocket"; // nouveau
 
-function isPortAvailable(port: number): Promise<boolean> {
-  return new Promise(resolve => {
-    const server = net.createServer();
-    server.listen(port, () => {
-      server.close(() => resolve(true));
-    });
-    server.on("error", () => resolve(false));
+const app = express();
+
+// ─────────────────────────────────────────────
+// CORS — autorise le frontend Vercel + localhost dev
+// ─────────────────────────────────────────────
+const allowedOrigins = [
+  "https://les-batisseurs-engages-app.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:3000",
+  // Ajouter ici d'autres domaines si nécessaire
+  ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Autoriser les requêtes sans origin (ex: Postman, curl)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      callback(new Error(`CORS bloqué pour : ${origin}`));
+    },
+    credentials: true, // nécessaire pour les cookies auth_token
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// ─────────────────────────────────────────────
+// Routes tRPC
+// ─────────────────────────────────────────────
+app.use(
+  "/trpc",
+  createExpressMiddleware({
+    router: appRouter,
+    createContext,
+    onError({ error, path }) {
+      if (error.code === "INTERNAL_SERVER_ERROR") {
+        console.error(`[tRPC] Erreur sur ${path}:`, error.message);
+      }
+    },
+  })
+);
+
+// ─────────────────────────────────────────────
+// Health check (Railway l'utilise pour vérifier que le service est up)
+// ─────────────────────────────────────────────
+app.get("/health", (_req, res) => {
+  res.json({
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV,
   });
-}
+});
 
-async function findAvailablePort(startPort: number = 3000): Promise<number> {
-  for (let port = startPort; port < startPort + 20; port++) {
-    if (await isPortAvailable(port)) {
-      return port;
-    }
-  }
-  throw new Error(`No available port found starting from ${startPort}`);
-}
+// ─────────────────────────────────────────────
+// Serveur HTTP + WebSocket
+// ─────────────────────────────────────────────
+const PORT = parseInt(process.env.PORT || "3000", 10);
+const httpServer = http.createServer(app);
 
-async function startServer() {
-  const app = express();
-  const server = createServer(app);
-  // Configure body parser with larger size limit for file uploads
-  app.use(express.json({ limit: "50mb" }));
-  app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  // OAuth callback under /api/oauth/callback
-  registerOAuthRoutes(app);
-  // tRPC API
-  app.use(
-    "/api/trpc",
-    createExpressMiddleware({
-      router: appRouter,
-      createContext,
-    })
-  );
-  // development mode uses Vite, production mode uses static files
-  if (process.env.NODE_ENV === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+// Activer WebSocket sur le même port HTTP
+setupWebSocket(httpServer);
 
-  const preferredPort = parseInt(process.env.PORT || "3000");
-  const port = await findAvailablePort(preferredPort);
+// ─────────────────────────────────────────────
+// Démarrage
+// ─────────────────────────────────────────────
+httpServer.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Serveur démarré sur le port ${PORT}`);
+  console.log(`🔔 WebSocket actif sur ws://0.0.0.0:${PORT}/ws`);
+  console.log(`🌍 Environnement : ${process.env.NODE_ENV}`);
+});
 
-  if (port !== preferredPort) {
-    console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
-  }
-
-  server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+// ─────────────────────────────────────────────
+// Graceful shutdown (Railway envoie SIGTERM avant d'arrêter le container)
+// ─────────────────────────────────────────────
+process.on("SIGTERM", () => {
+  console.log("SIGTERM reçu — arrêt en cours...");
+  httpServer.close(() => {
+    console.log("Serveur arrêté proprement.");
+    process.exit(0);
   });
-}
 
-startServer().catch(console.error);
+  // Forcer l'arrêt après 10s si des connexions traînent
+  setTimeout(() => process.exit(1), 10_000);
+});
+
+process.on("SIGINT", () => {
+  httpServer.close(() => process.exit(0));
+});
