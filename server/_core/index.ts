@@ -16,7 +16,7 @@ import http from "http";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { appRouter } from "./systemRouter";
+import { systemRouter } from "./systemRouter";
 import { createContext } from "./trpc";       // votre createContext existant
 import { setupWebSocket } from "./websocket"; // nouveau
 
@@ -57,7 +57,7 @@ app.use(cookieParser());
 app.use(
   "/trpc",
   createExpressMiddleware({
-    router: appRouter,
+    router: systemRouter,
     createContext,
     onError({ error, path }) {
       if (error.code === "INTERNAL_SERVER_ERROR") {
