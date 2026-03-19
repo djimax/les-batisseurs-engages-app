@@ -16,6 +16,7 @@ export default function GlobalSettings() {
   // Fetch global settings from database
   const { data: settings, isLoading, refetch } = trpc.globalSettings.get.useQuery();
   const updateMutation = trpc.globalSettings.update.useMutation();
+  const utils = trpc.useUtils();
 
   // Local state for form
   const [formData, setFormData] = useState({
@@ -88,7 +89,6 @@ export default function GlobalSettings() {
       });
       toast.success("Paramètres modifiés avec succès");
       // Invalider le cache pour mettre à jour immédiatement le tableau de bord
-      const utils = trpc.useUtils();
       await utils.globalSettings.get.invalidate();
       refetch();
     } catch (error) {

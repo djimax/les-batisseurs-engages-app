@@ -282,9 +282,9 @@ export default function Home() {
                     <div className="flex items-center gap-3 flex-1">
                       <FileText className="h-5 w-5 text-blue-600 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <p className="font-medium truncate">{doc.name}</p>
+                        <p className="font-medium truncate">{doc.title}</p>
                         <p className="text-xs text-muted-foreground">
-                          {doc.category?.name || "Sans catégorie"}
+                          {"Sans catégorie"}
                         </p>
                       </div>
                     </div>
@@ -318,9 +318,9 @@ export default function Home() {
                     <div className="flex items-center gap-3 flex-1">
                       <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <p className="font-medium truncate">{doc.name}</p>
+                        <p className="font-medium truncate">{doc.title}</p>
                         <p className="text-xs text-muted-foreground">
-                          {doc.category?.name || "Sans catégorie"}
+                          {"Sans catégorie"}
                         </p>
                       </div>
                     </div>

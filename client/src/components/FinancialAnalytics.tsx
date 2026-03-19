@@ -39,7 +39,7 @@ export function FinancialAnalytics({
     // Prévision simple basée sur la moyenne
     const predictedIncome = Math.round(monthlyAverageIncome * (1 + (Math.random() - 0.5) * 0.2));
     const predictedExpenses = Math.round(monthlyAverageExpenses * (1 + (Math.random() - 0.5) * 0.2));
-    const predictedBalance = (predictions[i - 2]?.balance || lastMonth.balance) + predictedIncome - predictedExpenses;
+    const predictedBalance: number = ((predictions[i - 2]?.balance || lastMonth.balance) as number) + predictedIncome - predictedExpenses;
     
     predictions.push({
       month: monthName,
@@ -254,7 +254,7 @@ export function FinancialAnalytics({
         <CardContent className="space-y-3 text-sm text-amber-700 dark:text-amber-400">
           <p>
             • <strong>Ratio Revenus/Dépenses :</strong> {incomeExpenseRatio}% - 
-            {incomeExpenseRatio > 10 ? " Excellent surplus" : incomeExpenseRatio > 0 ? " Bon équilibre" : " Déficit à surveiller"}
+            {(incomeExpenseRatio as number) > 10 ? " Excellent surplus" : (incomeExpenseRatio as number) > 0 ? " Bon équilibre" : " Déficit à surveiller"}
           </p>
           <p>
             • <strong>Tendance :</strong> Votre trésorerie est en {trend === "up" ? "hausse" : trend === "down" ? "baisse" : "stabilité"}
