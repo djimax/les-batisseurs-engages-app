@@ -245,10 +245,10 @@ function DashboardLayoutContent({
 
   return (
     <>
-      <div className="flex h-screen" ref={sidebarRef}>
+      <div className="flex h-screen w-full max-w-full overflow-hidden" ref={sidebarRef}>
         <Sidebar
           collapsible="icon"
-          className="border-r-0 flex-shrink-0"
+          className="border-r-0 flex-shrink-0 h-full"
           disableTransition={isResizing}
         >
           <SidebarHeader className="h-16 justify-center border-b border-primary/20">
@@ -407,7 +407,7 @@ function DashboardLayoutContent({
           />
         </Sidebar>
 
-        <SidebarInset className="flex flex-col flex-1 overflow-hidden">
+        <SidebarInset className="flex flex-col flex-1 min-w-0 overflow-hidden">
           <header className="sticky top-0 z-40 flex items-center gap-4 border-b border-primary/20 bg-white/95 dark:bg-slate-950/95 backdrop-blur-sm px-6 py-4 h-16 flex-shrink-0">
             <SidebarTrigger className="-ml-1" />
             <div className="flex-1">

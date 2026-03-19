@@ -173,8 +173,12 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
   }
-  body {
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
     @apply bg-background text-foreground;
   }
   button:not(:disabled),
@@ -215,7 +219,8 @@
     .container {
       padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1400px;
+      width: 100%;
+      max-width: 100%;
     }
   }
 }
