@@ -16,7 +16,7 @@ import http from "http";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { appRouter } from "./router";        // votre router tRPC existant
+import { appRouter } from "./systemRouter";
 import { createContext } from "./trpc";       // votre createContext existant
 import { setupWebSocket } from "./websocket"; // nouveau
 
