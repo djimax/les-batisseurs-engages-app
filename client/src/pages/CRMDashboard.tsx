@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Users, Activity, Zap, BarChart3, Mail, Plus } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 
-export function CRMDashboard() {
+function CRMDashboard() {
   const userQuery = trpc.auth.me.useQuery();
   const user = userQuery.data;
   const [activeTab, setActiveTab] = useState("contacts");
@@ -264,3 +264,5 @@ export function CRMDashboard() {
     </div>
   );
 }
+
+export default CRMDashboard;

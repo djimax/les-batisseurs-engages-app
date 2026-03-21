@@ -24,7 +24,7 @@ import AuditHistory from "./pages/AuditHistory";
 import AdminRoles from "./pages/AdminRoles";
 import AdminAuditLogs from "./pages/AdminAuditLogs";
 import AdminSettings from "./pages/AdminSettings";
-import { CRMDashboard } from "./pages/CRMDashboard";
+import CRMDashboard from "./pages/CRMDashboard";
 import CRMContacts from "./pages/CRMContacts";
 import CRMActivities from "./pages/CRMActivities";
 import CRMReports from "./pages/CRMReports";
