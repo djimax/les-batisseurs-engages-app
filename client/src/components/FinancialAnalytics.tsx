@@ -39,7 +39,8 @@ export function FinancialAnalytics({
     // Prévision simple basée sur la moyenne
     const predictedIncome = Math.round(monthlyAverageIncome * (1 + (Math.random() - 0.5) * 0.2));
     const predictedExpenses = Math.round(monthlyAverageExpenses * (1 + (Math.random() - 0.5) * 0.2));
-    const predictedBalance = (predictions[i - 2]?.balance || lastMonth.balance) + predictedIncome - predictedExpenses;
+    const prevBalance: number = i === 1 ? lastMonth.balance : (predictions[i - 2] as any).balance;
+    const predictedBalance: number = prevBalance + predictedIncome - predictedExpenses;
     
     predictions.push({
       month: monthName,
@@ -63,7 +64,7 @@ export function FinancialAnalytics({
   // Calculer les indicateurs clés
   const totalIncome = data.reduce((sum, d) => sum + d.income, 0);
   const totalExpenses = data.reduce((sum, d) => sum + d.expenses, 0);
-  const incomeExpenseRatio = totalIncome > 0 ? ((totalIncome - totalExpenses) / totalIncome * 100).toFixed(1) : 0;
+  const incomeExpenseRatio = totalIncome > 0 ? Number(((totalIncome - totalExpenses) / totalIncome * 100).toFixed(1)) : 0;
   const healthStatus = totalBalance > 0 ? "Sain" : "Critique";
   const healthColor = totalBalance > 0 ? "text-emerald-600" : "text-red-600";
 

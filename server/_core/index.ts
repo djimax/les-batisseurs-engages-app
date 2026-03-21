@@ -4,12 +4,6 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { systemRouter } from "./systemRouter";
 import { createContext } from "./context";
 import { setupWebSocket } from "./websocket";
-import express from "express";
-import http from "http";
-import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { systemRouter } from "./systemRouter";
-import { createContext } from "./context";
-import { setupWebSocket } from "./websocket";
 
 const app = express();
 

@@ -24,6 +24,18 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-xlsx': ['xlsx'],
+          'vendor-charts': ['recharts'],
+          'vendor-trpc': ['@trpc/client', '@trpc/react-query'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+    sourcemap: false,
+    minify: 'terser',
   },
   server: {
     host: true,

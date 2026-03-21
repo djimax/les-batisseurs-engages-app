@@ -1,0 +1,32 @@
+import { lazy } from 'react';
+
+// Lazy load pages pour réduire le bundle initial
+export const lazyPages = {
+  Home: lazy(() => import('@/pages/Home')),
+  Documents: lazy(() => import('@/pages/Documents')),
+  Members: lazy(() => import('@/pages/Members')),
+  Users: lazy(() => import('@/pages/Users')),
+  Activity: lazy(() => import('@/pages/Activity')),
+  Archives: lazy(() => import('@/pages/Archives')),
+  Finance: lazy(() => import('@/pages/Finance')),
+  Campaigns: lazy(() => import('@/pages/Campaigns')),
+  Adhesions: lazy(() => import('@/pages/Adhesions')),
+  Events: lazy(() => import('@/pages/Events')),
+  AdminPortal: lazy(() => import('@/pages/AdminPortal')),
+  Announcements: lazy(() => import('@/pages/Announcements')),
+  EmailComposer: lazy(() => import('@/pages/EmailComposer')),
+  AuditHistory: lazy(() => import('@/pages/AuditHistory')),
+  AdminRoles: lazy(() => import('@/pages/AdminRoles')),
+  AdminAuditLogs: lazy(() => import('@/pages/AdminAuditLogs')),
+  AdminSettings: lazy(() => import('@/pages/AdminSettings')),
+  CRMDashboard: lazy(() => import('@/pages/CRMDashboard')),
+  CRMContacts: lazy(() => import('@/pages/CRMContacts')),
+  CRMActivities: lazy(() => import('@/pages/CRMActivities')),
+  CRMReports: lazy(() => import('@/pages/CRMReports')),
+  Settings: lazy(() => import('@/pages/Settings')),
+  GlobalSettings: lazy(() => import('@/pages/GlobalSettings')),
+  Categories: lazy(() => import('@/pages/Categories')),
+  PublicLanding: lazy(() => import('@/pages/PublicLanding')),
+  InternalLogin: lazy(() => import('@/pages/InternalLogin')),
+  NotFound: lazy(() => import('@/pages/NotFound')),
+};
