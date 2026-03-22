@@ -1,85 +1,86 @@
 import { Toaster } from "@/components/ui/sonner";
-import "@/styles/optimizations.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import DashboardLayout from "./components/DashboardLayout";
-import Home from "./pages/Home";
-import Documents from "./pages/Documents";
-import Members from "./pages/Members";
-import Users from "./pages/Users";
-import Activity from "./pages/Activity";
-import Archives from "./pages/Archives";
-import Finance from "./pages/Finance";
-import Campaigns from "./pages/Campaigns";
-import Adhesions from "./pages/Adhesions";
-import Events from "./pages/Events";
-import ProtectedUserManagement from "./pages/ProtectedUserManagement";
-import AdminPortal from "./pages/AdminPortal";
-import Announcements from "./pages/Announcements";
-import EmailComposer from "./pages/EmailComposer";
-import AuditHistory from "./pages/AuditHistory";
-import AdminRoles from "./pages/AdminRoles";
-import AdminAuditLogs from "./pages/AdminAuditLogs";
-import AdminSettings from "./pages/AdminSettings";
-import CRMDashboard from "./pages/CRMDashboard";
-import CRMContacts from "./pages/CRMContacts";
-import CRMActivities from "./pages/CRMActivities";
-import CRMReports from "./pages/CRMReports";
-import Settings from "./pages/Settings";
-import GlobalSettings from "./pages/GlobalSettings";
-import Categories from "./pages/Categories";
-import PublicLanding from "./pages/PublicLanding";
-import InternalLogin from "./pages/InternalLogin";
+import { Suspense, lazy } from "react";
+import { Loader2 } from "lucide-react";
+
+// Lazy-loaded pages
+const Home = lazy(() => import("@/pages/Home"));
+const Documents = lazy(() => import("@/pages/Documents"));
+const Members = lazy(() => import("@/pages/Members"));
+const Users = lazy(() => import("@/pages/Users"));
+const Activity = lazy(() => import("@/pages/Activity"));
+const Archives = lazy(() => import("@/pages/Archives"));
+const Finance = lazy(() => import("@/pages/Finance"));
+const Campaigns = lazy(() => import("@/pages/Campaigns"));
+const Adhesions = lazy(() => import("@/pages/Adhesions"));
+const Events = lazy(() => import("@/pages/Events"));
+const Announcements = lazy(() => import("@/pages/Announcements"));
+const EmailComposer = lazy(() => import("@/pages/EmailComposer"));
+const AuditHistory = lazy(() => import("@/pages/AuditHistory"));
+const AdminRoles = lazy(() => import("@/pages/AdminRoles"));
+const AdminAuditLogs = lazy(() => import("@/pages/AdminAuditLogs"));
+const CRMDashboard = lazy(() => import("@/pages/CRMDashboard"));
+const CRMContacts = lazy(() => import("@/pages/CRMContacts"));
+const CRMActivities = lazy(() => import("@/pages/CRMActivities"));
+const CRMReports = lazy(() => import("@/pages/CRMReports"));
+const Settings = lazy(() => import("@/pages/Settings"));
+const GlobalSettings = lazy(() => import("@/pages/GlobalSettings"));
+const Categories = lazy(() => import("@/pages/Categories"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
+
+function PageLoader() {
+  return (
+    <div className="flex items-center justify-center h-64">
+      <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+    </div>
+  );
+}
+
+function Router() {
+  return (
+    <DashboardLayout>
+      <Suspense fallback={<PageLoader />}>
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/documents" component={Documents} />
+          <Route path="/members" component={Members} />
+          <Route path="/users" component={Users} />
+          <Route path="/activity" component={Activity} />
+          <Route path="/archives" component={Archives} />
+          <Route path="/finance" component={Finance} />
+          <Route path="/campaigns" component={Campaigns} />
+          <Route path="/adhesions" component={Adhesions} />
+          <Route path="/events" component={Events} />
+          <Route path="/announcements" component={Announcements} />
+          <Route path="/email-composer" component={EmailComposer} />
+          <Route path="/audit-history" component={AuditHistory} />
+          <Route path="/admin/roles" component={AdminRoles} />
+          <Route path="/admin/audit-logs" component={AdminAuditLogs} />
+          <Route path="/crm" component={CRMDashboard} />
+          <Route path="/crm/contacts" component={CRMContacts} />
+          <Route path="/crm/activities" component={CRMActivities} />
+          <Route path="/crm/reports" component={CRMReports} />
+          <Route path="/settings" component={Settings} />
+          <Route path="/global-settings" component={GlobalSettings} />
+          <Route path="/categories" component={Categories} />
+          <Route component={NotFound} />
+        </Switch>
+      </Suspense>
+    </DashboardLayout>
+  );
+}
 
 function App() {
-  const handleLogout = () => {
-    // Simple logout - just redirect to home
-    window.location.href = "/";
-  };
-
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
-          <Switch>
-            <Route path="/public" component={PublicLanding} />
-            <Route path="/login" component={InternalLogin} />
-            <Route>
-              <DashboardLayout onLogout={handleLogout}>
-                <Switch>
-                  <Route path="/" component={Home} />
-                  <Route path="/documents" component={Documents} />
-                  <Route path="/categories" component={Categories} />
-                  <Route path="/members" component={Members} />
-                  <Route path="/users" component={Users} />
-                  <Route path="/finance" component={Finance} />
-                  <Route path="/activity" component={Activity} />
-                  <Route path="/archives" component={Archives} />
-                  <Route path="/campaigns" component={Campaigns} />
-                  <Route path="/adhesions" component={Adhesions} />
-                  <Route path="/events" component={Events} />
-                  <Route path="/admin-portal" component={AdminPortal} />
-                  <Route path="/announcements" component={Announcements} />
-                  <Route path="/email-composer" component={EmailComposer} />
-                  <Route path="/audit-history" component={AuditHistory} />
-                  <Route path="/admin/roles" component={AdminRoles} />
-                  <Route path="/admin/audit-logs" component={AdminAuditLogs} />
-                  <Route path="/admin/settings" component={AdminSettings} />
-                  <Route path="/crm" component={CRMDashboard} />
-                  <Route path="/crm/contacts" component={CRMContacts} />
-                  <Route path="/crm/activities" component={CRMActivities} />
-                  <Route path="/crm/reports" component={CRMReports} />
-                  <Route path="/settings" component={Settings} />
-                  <Route path="/global-settings" component={GlobalSettings} />
-                  <Route component={NotFound} />
-                </Switch>
-              </DashboardLayout>
-            </Route>
-          </Switch>
+          <Router />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

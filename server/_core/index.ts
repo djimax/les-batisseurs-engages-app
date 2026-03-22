@@ -1,49 +1,65 @@
+import "dotenv/config";
 import express from "express";
-import http from "http";
+import { createServer } from "http";
+import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { systemRouter } from "./systemRouter";
+import { registerOAuthRoutes } from "./oauth";
+import { appRouter } from "../routers";
 import { createContext } from "./context";
-import { setupWebSocket } from "./websocket";
+import { serveStatic, setupVite } from "./vite";
 
-const app = express();
+function isPortAvailable(port: number): Promise<boolean> {
+  return new Promise(resolve => {
+    const server = net.createServer();
+    server.listen(port, () => {
+      server.close(() => resolve(true));
+    });
+    server.on("error", () => resolve(false));
+  });
+}
 
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true }));
-
-const allowedOrigins = [
-  "https://les-batisseurs-engages-app.vercel.app",
-  "http://localhost:5173",
-  ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
-];
-
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (!origin || allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin || "*");
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization");
+async function findAvailablePort(startPort: number = 3000): Promise<number> {
+  for (let port = startPort; port < startPort + 20; port++) {
+    if (await isPortAvailable(port)) {
+      return port;
+    }
   }
-  if (req.method === "OPTIONS") return res.sendStatus(200);
-  next();
-});
+  throw new Error(`No available port found starting from ${startPort}`);
+}
 
-app.use("/trpc", createExpressMiddleware({ router: systemRouter, createContext }));
+async function startServer() {
+  const app = express();
+  const server = createServer(app);
+  // Configure body parser with larger size limit for file uploads
+  app.use(express.json({ limit: "50mb" }));
+  app.use(express.urlencoded({ limit: "50mb", extended: true }));
+  // OAuth callback under /api/oauth/callback
+  registerOAuthRoutes(app);
+  // tRPC API
+  app.use(
+    "/api/trpc",
+    createExpressMiddleware({
+      router: appRouter,
+      createContext,
+    })
+  );
+  // development mode uses Vite, production mode uses static files
+  if (process.env.NODE_ENV === "development") {
+    await setupVite(app, server);
+  } else {
+    serveStatic(app);
+  }
 
-app.get("/health", (_req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
-});
+  const preferredPort = parseInt(process.env.PORT || "3000");
+  const port = await findAvailablePort(preferredPort);
 
-const PORT = parseInt(process.env.PORT || "8080", 10);
-const httpServer = http.createServer(app);
-setupWebSocket(httpServer);
+  if (port !== preferredPort) {
+    console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
+  }
 
-httpServer.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Serveur démarré port ${PORT}`);
-  console.log(`🔔 WebSocket actif sur /ws`);
-});
+  server.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}/`);
+  });
+}
 
-process.on("SIGTERM", () => {
-  httpServer.close(() => process.exit(0));
-  setTimeout(() => process.exit(1), 10_000);
-});
+startServer().catch(console.error);

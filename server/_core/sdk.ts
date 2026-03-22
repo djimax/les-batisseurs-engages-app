@@ -256,14 +256,14 @@ class SDKServer {
     } as GetUserInfoWithJwtResponse;
   }
 
-  async authenticateRequest(req: Request): Promise<User | null> {
+  async authenticateRequest(req: Request): Promise<User> {
     // Regular authentication flow
     const cookies = this.parseCookies(req.headers.cookie);
     const sessionCookie = cookies.get(COOKIE_NAME);
     const session = await this.verifySession(sessionCookie);
 
     if (!session) {
-      return null;
+      throw ForbiddenError("Invalid session cookie");
     }
 
     const sessionUserId = session.openId;
@@ -284,12 +284,12 @@ class SDKServer {
         user = await db.getUserByOpenId(userInfo.openId);
       } catch (error) {
         console.error("[Auth] Failed to sync user from OAuth:", error);
-        return null;
+        throw ForbiddenError("Failed to sync user info");
       }
     }
 
     if (!user) {
-      return null;
+      throw ForbiddenError("User not found");
     }
 
     await db.upsertUser({
