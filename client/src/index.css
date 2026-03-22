@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *)); - DÉSACTIVÉ */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -52,12 +52,12 @@
 }
 
 :root {
-  /* 🎨 THEME MODERNE MINIMALISTE - Bleu ciel, Gris neutre, Accents subtils */
+  /* 🎨 THEME BLEU MARINE SOMBRE - Bleu marine sombre, Gris neutre, Accents subtils */
   
-  /* Primary: Bleu ciel moderne */
-  --primary: oklch(0.5 0.15 250);
+  /* Primary: Bleu marine sombre */
+  --primary: oklch(0.25 0.12 260);
   --primary-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.48 0.14 250);
+  --sidebar-primary: oklch(0.22 0.11 260);
   --sidebar-primary-foreground: oklch(0.98 0 0);
   
   /* Accent: Vert émeraude subtil */
@@ -65,9 +65,9 @@
   --accent-foreground: oklch(0.98 0 0);
   
   /* Charts: Palette moderne et cohérente */
-  --chart-1: oklch(0.5 0.15 250);  /* Bleu ciel */
+  --chart-1: oklch(0.25 0.12 260);  /* Bleu marine sombre */
   --chart-2: oklch(0.6 0.18 140);  /* Vert émeraude */
-  --chart-3: oklch(0.55 0.16 200); /* Bleu turquoise */
+  --chart-3: oklch(0.35 0.14 260); /* Bleu marine moyen */
   --chart-4: oklch(0.65 0.16 50);  /* Orange subtil */
   --chart-5: oklch(0.52 0.14 280); /* Violet doux */
   
@@ -101,74 +101,18 @@
   /* Border: Gris très subtil */
   --border: oklch(0.92 0.002 0);
   --input: oklch(0.92 0.002 0);
-  --ring: oklch(0.5 0.15 250);
+  --ring: oklch(0.25 0.12 260);
   
   /* Sidebar: Blanc avec bordure subtile */
   --sidebar: oklch(0.99 0.001 0);
   --sidebar-foreground: oklch(0.2 0.01 250);
   --sidebar-accent: oklch(0.95 0.003 0);
-  --sidebar-accent-foreground: oklch(0.5 0.15 250);
+  --sidebar-accent-foreground: oklch(0.25 0.12 260);
   --sidebar-border: oklch(0.92 0.002 0);
-  --sidebar-ring: oklch(0.5 0.15 250);
+  --sidebar-ring: oklch(0.25 0.12 260);
 }
 
-.dark {
-  /* 🌜 DARK MODE - Minimaliste et moderne */
-  
-  /* Primary: Bleu ciel clair */
-  --primary: oklch(0.65 0.15 250);
-  --primary-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.62 0.14 250);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  
-  /* Accent: Vert émeraude vif */
-  --accent: oklch(0.72 0.18 140);
-  --accent-foreground: oklch(0.15 0.01 140);
-  
-  /* Background: Noir très sombre et neutre */
-  --background: oklch(0.12 0.005 0);
-  --foreground: oklch(0.95 0.002 0);
-  
-  /* Card: Gris très foncé */
-  --card: oklch(0.17 0.008 250);
-  --card-foreground: oklch(0.95 0.002 0);
-  
-  /* Popover */
-  --popover: oklch(0.17 0.008 250);
-  --popover-foreground: oklch(0.95 0.002 0);
-  
-  /* Secondary: Gris foncé neutre */
-  --secondary: oklch(0.22 0.008 0);
-  --secondary-foreground: oklch(0.85 0.003 0);
-  
-  /* Muted */
-  --muted: oklch(0.25 0.008 0);
-  --muted-foreground: oklch(0.65 0.01 0);
-  
-  /* Destructive */
-  --destructive: oklch(0.65 0.2 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  
-  /* Border */
-  --border: oklch(0.22 0.008 0);
-  --input: oklch(0.22 0.008 0);
-  --ring: oklch(0.65 0.15 250);
-  
-  /* Charts - versions dark minimalistes */
-  --chart-1: oklch(0.65 0.15 250);
-  --chart-2: oklch(0.72 0.18 140);
-  --chart-3: oklch(0.62 0.14 200);
-  --chart-4: oklch(0.68 0.15 50);
-  --chart-5: oklch(0.65 0.12 280);
-  
-  /* Sidebar dark */
-  --sidebar: oklch(0.15 0.006 0);
-  --sidebar-foreground: oklch(0.95 0.002 0);
-  --sidebar-accent: oklch(0.22 0.008 0);
-  --sidebar-accent-foreground: oklch(0.95 0.002 0);
-  --sidebar-border: oklch(0.22 0.008 0);
-  --sidebar-ring: oklch(0.65 0.15 250);
-}
+/* MODE SOMBRE DÉSACTIVÉ - Utilisation uniquement du thème clair avec bleu marine sombre */
 
 @layer base {
   * {
