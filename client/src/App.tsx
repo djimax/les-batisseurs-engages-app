@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { CurrencyProvider } from "./contexts/CurrencyContext";
 import DashboardLayout from "./components/DashboardLayout";
 import { Suspense, lazy } from "react";
 import { Loader2 } from "lucide-react";
@@ -78,10 +79,12 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+        <CurrencyProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </CurrencyProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
